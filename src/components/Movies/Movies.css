@@ -1,0 +1,99 @@
+.films {
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.films__list {
+  list-style: none;
+  line-height: 0;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(270px,1fr));
+  /*grid-template-columns: repeat(auto-fit,minmax(282px,1fr));*/
+  /*grid-template-columns: repeat(auto-fit, 282px);*/
+  row-gap: 38px;
+  column-gap: 20px;
+}
+
+.films__card {
+  width: 100%;
+  overflow: hidden;
+}
+
+.films__image {
+  width: 100%;
+  object-fit: cover;
+  height: 151px;
+}
+
+.films__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 10px 0 13px;
+}
+
+.films__title {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 4px 0 0;
+  max-width: 220px;
+  white-space: pre-wrap;
+  height: 32px;
+  overflow: hidden;
+  /*text-overflow: ellipsis;*/
+}
+
+.films__like-button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  background-size: 10px 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../images/likebtn.svg);
+  background-color: #313131;
+  transition: opacity .4s linear;
+  cursor: pointer;
+}
+
+.films__like-button:hover {
+  opacity: .5;
+}
+
+.films__duration {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8B8B8B;
+  border-top: 1px solid #424242;
+  margin: 0;
+  padding-top: 6px;
+}
+
+.films__button-more {
+  background-color: transparent;
+  color: #fff;
+  width: 320px;
+  height: 36px;
+  border-radius: 5px;
+  border: 1px solid #424242;
+  font-size: 12px;
+  transition: opacity .4s linear;
+  cursor: pointer;
+  margin: 60px auto 80px;
+  padding: 0;
+  align-self: center;
+}
+
+.films__button-more:hover {
+  opacity: .6;
+}
+
