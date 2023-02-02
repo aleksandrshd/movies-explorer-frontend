@@ -5,6 +5,8 @@ import Movies from "../Movies/Movies";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
 import Promo from "../Promo/Promo";
+import NavTab from "../NavTab/NavTab";
+import AboutProject from "../AboutProject/AboutProject";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Movies />
       <Footer />*/}
       <Promo />
+      <NavTab />
+      <AboutProject />
     </div>
   );
 }
