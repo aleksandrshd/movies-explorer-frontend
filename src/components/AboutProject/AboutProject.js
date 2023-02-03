@@ -5,6 +5,7 @@ export default function AboutProject() {
   return (
     <section className="project">
       <h2 className="project__header">О проекте</h2>
+      <div className="project__border"/>
       <div className="project__container">
         <div>
           <h3 className="project__title">Дипломный проект включал 5 этапов</h3>
@@ -17,9 +18,13 @@ export default function AboutProject() {
             чтобы успешно защититься.</p>
         </div>
       </div>
-      <div className="project__duration-container">
-        <p className="project__duration-back">1 неделя</p>
-        <p className="project__duration-front">4 недели</p>
+      <div className="project__about-container">
+        <p className="project__about">1 неделя</p>
+        <p className="project__about project__about_front">4 недели</p>
+      </div>
+      <div className="project__about-container">
+        <p className="project__about project__about_transparent">Back-end</p>
+        <p className="project__about project__about_front project__about_transparent">Front-end</p>
       </div>
     </section>
   );

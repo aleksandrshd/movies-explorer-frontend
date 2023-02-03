@@ -20,4 +20,9 @@
   text-decoration: none;
   border-bottom: 1px solid #fff;
   padding-bottom: 1px;
+  transition: opacity .4s linear;
+}
+
+.navtab__link:hover {
+  opacity: .6;
 }

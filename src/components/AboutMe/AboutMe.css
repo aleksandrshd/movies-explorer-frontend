@@ -1,0 +1,48 @@
+.student {
+  padding: 112px 70px 97px;
+  color: #fff;
+}
+
+.student__header {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.student__border {
+  height: 1px;
+  background-color: #DADADA;
+  margin: 23px 0 70px;
+}
+
+.student__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.student__title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.student__paragraph {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 550px;
+  margin: 26px 0 110px;
+}
+
+.student__image {
+  width: 270px;
+  height: 327px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(../../images/student.svg);
+  align-self: start;
+}
