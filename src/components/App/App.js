@@ -13,15 +13,13 @@ import AboutMe from "../AboutMe/AboutMe";
 function App() {
   return (
     <div className="App">
-      {/*<Header />
-      <SearchForm />
-      <Movies />
-      <Footer />*/}
-      {/*<Promo />*/}
+      <Header loggedIn={false} />
+      <Promo />
       <NavTab />
       <AboutProject />
       <Techs />
       <AboutMe />
+      <Footer />
     </div>
   );
 }

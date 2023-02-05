@@ -4,6 +4,10 @@
     padding: 18px 70px;
 }
 
+.header_blue {
+    background-color: #073042;
+}
+
 .header__container {
     display: flex;
     align-items: center;
@@ -34,8 +38,22 @@
     opacity: .6;
 }
 
-.header__link:last-of-type {
+.header__link_last {
     margin-left: 40px;
+}
+
+.header__link_green {
+    color: #000;
+    text-align: center;
+    justify-self: stretch;
+}
+
+.header__link-container {
+    background-color: #3DDC84;
+    border-radius: 3px;
+    width: 76px;
+    height: 32px;
+    display: flex;
 }
 
 .header__account-logo {
