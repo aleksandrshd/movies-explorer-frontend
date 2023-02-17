@@ -15,11 +15,11 @@ function App() {
     <div className="App">
       <Header loggedIn={false} />
       <Promo />
-      <NavTab />
+      {/*<NavTab />
       <AboutProject />
       <Techs />
       <AboutMe />
-      <Footer />
+      <Footer />*/}
     </div>
   );
 }

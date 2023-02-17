@@ -10,6 +10,13 @@
     align-items: center;
 }
 
+@media screen and (max-width: 768px) {
+    .promo {
+        width: 768px;
+        height: 768px;
+    }
+}
+
 .promo__header {
     font-weight: 400;
     font-size: 50px;
