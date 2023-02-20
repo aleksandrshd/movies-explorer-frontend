@@ -3,6 +3,12 @@
   color: #fff;
 }
 
+@media screen and (max-width: 768px) {
+  .project {
+    padding: 92px 43px 77px;
+  }
+}
+
 .project__header {
   font-weight: 400;
   font-size: 22px;
@@ -22,6 +28,12 @@
   gap: 40px;
 }
 
+@media screen and (max-width: 768px) {
+  .project__container {
+    gap: 32px;
+  }
+}
+
 .project__title {
   font-weight: 400;
   font-size: 20px;
@@ -36,6 +48,14 @@
   line-height: 20px;
   max-width: 550px;
   margin: 26px 0 110px;
+}
+
+@media screen and (max-width: 768px) {
+  .project__paragraph {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 22px 0 93px;
+  }
 }
 
 .project__about-container {
@@ -53,10 +73,22 @@
   color: #000;
 }
 
+@media screen and (max-width: 768px) {
+  .project__about {
+    width: 140px;
+  }
+}
+
 .project__about_front {
   width: 912px;
   background-color: #303030;
   color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .project__about_front {
+    width: 528px;
+  }
 }
 
 .project__about_transparent {

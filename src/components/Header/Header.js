@@ -15,9 +15,9 @@ export default function Header({loggedIn}) {
         <div className="header__account-logo"></div></Link>
       </div>}
       {!loggedIn && <div className="header__container">
-        <Link className="header__link" to="/sign-up">Регистрация</Link>
+        <Link className="header__link header__link_small-text" to="/sign-up">Регистрация</Link>
         <div className="header__link-container">
-          <Link className="header__link header__link_green" to="/sign-in">Войти</Link>
+          <Link className="header__link header__link_green header__link_small-text" to="/sign-in">Войти</Link>
         </div>
       </div>}
 

@@ -60,6 +60,11 @@
     justify-self: stretch;
 }
 
+.header__link_small-text {
+    font-size: 12px;
+    line-height: 16px;
+}
+
 @media screen and (max-width: 768px) {
     .header__link {
         font-size: 12px;
