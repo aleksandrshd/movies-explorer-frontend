@@ -11,7 +11,15 @@
 @media screen and (max-width: 768px) {
     .promo {
         max-width: 768px;
+        background-size: 248px 248px;
         background-position: center 224px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .promo {
+        max-width: 320px;
+        background-position: center 142px;
     }
 }
 
@@ -30,5 +38,14 @@
 @media screen and (max-width: 768px) {
     .promo__header {
         padding: 326px 0 342px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .promo__header {
+        font-size: 31px;
+        line-height: 39px;
+        max-width: 730px;
+        padding: 207px 0 246px;
     }
 }

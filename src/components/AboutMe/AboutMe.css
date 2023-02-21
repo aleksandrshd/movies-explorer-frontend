@@ -5,7 +5,13 @@
 
 @media screen and (max-width: 768px) {
   .student {
-    padding: 89px 42px 123px;
+    padding: 89px 50px 123px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .student {
+    padding: 70px 14px;
   }
 }
 
@@ -17,15 +23,35 @@
   margin: 0;
 }
 
+@media screen and (max-width: 544px) {
+  .student__header {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
 .student__border {
   height: 1px;
   background-color: #DADADA;
   margin: 22px 0 66px;
 }
 
+@media screen and (max-width: 544px) {
+  .student__border {
+    margin: 28px 0 60px;
+  }
+}
+
 .student__container {
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 544px) {
+  .student__container {
+    flex-direction: column-reverse;
+    gap: 40px;
+  }
 }
 
 .student__title {
@@ -43,6 +69,13 @@
   }
 }
 
+@media screen and (max-width: 544px) {
+  .student__title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+}
+
 .student__subtitle {
   font-weight: 500;
   font-size: 18px;
@@ -55,6 +88,14 @@
     font-size: 12px;
     line-height: 18px;
     margin: 16px 0;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .student__subtitle {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 20px 0;
   }
 }
 
@@ -108,6 +149,13 @@
   .student__image {
     width: 253px;
     height: 307px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .student__image {
+    width: 292px;
+    height: 352px;
   }
 }
 
