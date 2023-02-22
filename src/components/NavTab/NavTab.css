@@ -33,7 +33,7 @@
   transition: opacity .4s linear;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 544px) {
   .navtab__link {
     font-size: 11px;
   }

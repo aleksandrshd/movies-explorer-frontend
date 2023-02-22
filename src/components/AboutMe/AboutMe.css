@@ -45,6 +45,7 @@
 .student__container {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
 @media screen and (max-width: 544px) {
@@ -112,6 +113,13 @@
   }
 }
 
+@media screen and (max-width: 544px) {
+  .student__subtitle_grey {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
 .student__paragraph {
   font-weight: 400;
   font-size: 14px;
@@ -126,6 +134,14 @@
     line-height: 18px;
     max-width: 355px;
     margin: 20px 0 87px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .student__paragraph {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 20px 0 40px;
   }
 }
 
@@ -156,6 +172,7 @@
   .student__image {
     width: 292px;
     height: 352px;
+    align-self: center;
   }
 }
 
@@ -166,6 +183,12 @@
 @media screen and (max-width: 768px) {
   .student__portfolio {
     padding: 91px 0 0;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .student__portfolio {
+    padding: 70px 0 0;
   }
 }
 
@@ -185,9 +208,16 @@
   }
 }
 
+@media screen and (max-width: 544px) {
+  .student__list {
+    padding: 40px 0 0;
+  }
+}
+
 .student__list-item {
   border-bottom: 1px solid #424242;
   padding-bottom: 18px;
+  line-height: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -228,6 +258,13 @@
   }
 }
 
+@media screen and (max-width: 544px) {
+  .student__link-text {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
 .student__link-logo {
   width: 18px;
   height: 18px;
@@ -243,5 +280,13 @@
   .student__link-logo {
     margin-top: 7px;
     margin-right: 4px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .student__link-logo {
+    width: 12px;
+    height: 12px;
+    margin: 0 4px 3px 0;
   }
 }

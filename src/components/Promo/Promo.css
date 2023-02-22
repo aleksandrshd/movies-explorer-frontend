@@ -11,14 +11,14 @@
 @media screen and (max-width: 768px) {
     .promo {
         max-width: 768px;
-        background-size: 248px 248px;
         background-position: center 224px;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 544px) {
     .promo {
-        max-width: 320px;
+        max-width: 544px;
+        background-size: 248px 248px;
         background-position: center 142px;
     }
 }
@@ -41,7 +41,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 544px) {
     .promo__header {
         font-size: 31px;
         line-height: 39px;
