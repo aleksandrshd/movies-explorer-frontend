@@ -1,5 +1,3 @@
-import {Link} from "react-router-dom";
-
 import './NavTab.css'
 
 export default function NavTab() {
@@ -8,13 +6,13 @@ export default function NavTab() {
     <section className="navtab">
       <ul className="navtab__list">
         <li className="navtab__list-element">
-          <Link className="navtab__link" to="/sign-in">О проекте</Link>
+          <a className="navtab__link" href="#about_project">О проекте</a>
         </li>
         <li className="navtab__list-element">
-          <Link className="navtab__link" to="/sign-in">Технологии</Link>
+          <a className="navtab__link" href="#techs">Технологии</a>
         </li>
         <li className="navtab__list-element">
-          <Link className="navtab__link" to="/sign-in">Студент</Link>
+          <a className="navtab__link" href="#student">Студент</a>
         </li>
       </ul>
     </section>

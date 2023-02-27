@@ -7,11 +7,11 @@ export default function Header({loggedIn}) {
   return (
     <header className={`header ${loggedIn ? '' : 'header_blue'}`}>
 
-      <div className="header__logo"></div>
+      <Link className="header__link" to="/"><div className="header__logo"></div></Link>
       {loggedIn && <div className="header__container">
-        <Link className="header__link" to="/sign-in">Фильмы</Link>
-        <Link className="header__link" to="/sign-up">Сохраненные фильмы</Link>
-        <Link className="header__link header__link_last" to="/sign-up">Аккаунт
+        <Link className="header__link" to="/movies">Фильмы</Link>
+        <Link className="header__link" to="/saved-movies">Сохраненные фильмы</Link>
+        <Link className="header__link header__link_last" to="/profile">Аккаунт
           <div className="header__account-logo"></div></Link>
       </div>}
       {!loggedIn && <div className="header__container">

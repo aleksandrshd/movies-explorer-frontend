@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 export default function AboutMe() {
 
   return (
-    <section className="student">
+    <section className="student" id="student">
       <h2 className="student__header">Студент</h2>
       <div className="student__border"/>
       <div className="student__container">
@@ -24,22 +24,22 @@ export default function AboutMe() {
         <h4 className="student__subtitle student__subtitle_grey">Портфолио</h4>
         <ul className="student__list">
           <li className="student__list-item">
-            <Link className="student__link" to="/">
+            <a className="student__link" href="https://github.com/aleksandrshd/how-to-learn">
               <p className="student__link-text">Статичный сайт</p>
               <div className="student__link-logo"/>
-            </Link>
+            </a>
           </li>
           <li className="student__list-item">
-            <Link className="student__link" to="/">
+            <a className="student__link" href="https://github.com/aleksandrshd/russian-travel">
               <p className="student__link-text">Адаптивный сайт</p>
               <div className="student__link-logo"/>
-            </Link>
+            </a>
           </li>
           <li className="student__list-item">
-            <Link className="student__link" to="/">
+            <a className="student__link" href="https://github.com/aleksandrshd/react-mesto-api-full">
               <p className="student__link-text">Одностраничное приложение</p>
               <div className="student__link-logo"/>
-            </Link>
+            </a>
           </li>
         </ul>
       </div>

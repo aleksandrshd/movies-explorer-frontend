@@ -22,7 +22,7 @@ export default function Login() {
       name="password"/>
     <span className="login__error"></span>
     <button className="login__button">Войти</button>
-    <p className="login__caption">Ещё не зарегистрированы? <Link className="login__link" to="/sign-in">Регистрация</Link>
+    <p className="login__caption">Ещё не зарегистрированы? <Link className="login__link" to="/sign-up">Регистрация</Link>
     </p>
   </form>);
 

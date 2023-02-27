@@ -1,42 +1,54 @@
-import {Route, Routes} from 'react-router-dom';
+import {useCallback, useState} from "react";
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 import './App.css';
 
-import Header from "../Header/Header";
-import Movies from "../Movies/Movies";
-import SearchForm from "../SearchForm/SearchForm";
-import Footer from "../Footer/Footer";
-import Promo from "../Promo/Promo";
-import NavTab from "../NavTab/NavTab";
-import AboutProject from "../AboutProject/AboutProject";
-import Techs from "../Techs/Techs";
-import AboutMe from "../AboutMe/AboutMe";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import Profile from "../Profile/Profile";
+import Landing from "../Landing/Landing";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Films from "../Films/Films";
+import SavedFilms from "../SavedFilms/SavedFilms";
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(true);
+
+  const cbLogout = useCallback(() => {
+    setLoggedIn(false);
+  }, []);
+
   return (
     <div className="App">
-      <Routes>
-        <Route path="/sign-in" element={<Login />}/>
-        <Route path="/sign-up">
-          <Header loggedIn={false} />
-          <Register />
+      <Switch>
+        <ProtectedRoute path="/landing"
+                        loggedIn={loggedIn}
+                        component={Landing}/>
+        <Route path="/sign-in">
+          <Login/>
         </Route>
+        <Route path="/sign-up">
+          <Register/>
+        </Route>
+        <ProtectedRoute path="/movies"
+                        loggedIn={loggedIn}
+                        component={Films}/>
+        <ProtectedRoute path="/saved-movies"
+                        loggedIn={loggedIn}
+                        component={SavedFilms}/>
+        <ProtectedRoute path="/profile"
+                        loggedIn={loggedIn}
+                        component={Profile}
+                        onLogout={cbLogout}/>
         <Route exact path="/">
-          <Header loggedIn={false} />
-          <Promo />
-          <NavTab />
-          <AboutProject />
-          <Techs />
-          <AboutMe />
-          <Footer />
+          {loggedIn ? <Redirect to="/landing"/> : <Redirect to="/sign-in"/>}
         </Route>
         <Route path="*">
-          <PageNotFound />
+          <PageNotFound/>
         </Route>
-      </Routes>
+      </Switch>
     </div>
   );
 }
