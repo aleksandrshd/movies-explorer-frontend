@@ -1,0 +1,40 @@
+.films {
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.films__list {
+  list-style: none;
+  line-height: 0;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(270px,1fr));
+  /*grid-template-columns: repeat(auto-fit,minmax(282px,1fr));*/
+  /*grid-template-columns: repeat(auto-fit, 282px);*/
+  row-gap: 38px;
+  column-gap: 20px;
+}
+
+.films__button-more {
+  background-color: transparent;
+  color: #fff;
+  width: 320px;
+  height: 36px;
+  border-radius: 5px;
+  border: 1px solid #424242;
+  font-size: 12px;
+  transition: opacity .4s linear;
+  cursor: pointer;
+  margin: 60px auto 80px;
+  padding: 0;
+  align-self: center;
+}
+
+.films__button-more:hover {
+  opacity: .6;
+}
+

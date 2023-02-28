@@ -1,1 +1,1 @@
-Фронтенд проекта Movies
+Фронтенд проекта MoviesCardList

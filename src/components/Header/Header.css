@@ -1,23 +1,81 @@
+@keyframes openMenu {
+    0% {
+        right: -100%;
+    }
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes closeMenu {
+    0% {
+        right: 0;
+    }
+    99% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        right: -100%;
+    }
+}
+
+@keyframes span1-active {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes span3-active {
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+
+    100% {
+        transform: translateY(-20px) rotate(-45deg);
+    }
+}
+
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 18px 70px;
+    padding: 15px 70px;
 }
 
 @media screen and (max-width: 768px) {
     .header {
-        padding: 18px 30px;
+        padding: 15px 30px;
     }
 }
 
 @media screen and (max-width: 544px) {
     .header {
-        padding: 18px 14px;
+        padding: 15px 14px;
     }
 }
 
 .header_blue {
     background-color: #073042;
+}
+
+.header__overlay {
+    position: fixed;
+    opacity: 0;
+    z-index: -1;
+}
+
+.header__overlay_opened {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .header__container {
@@ -32,6 +90,37 @@
     }
 }
 
+.header__container_loggedIn {
+    gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .header__container_hidden {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        z-index: 3;
+        background-color: #202020;
+        animation: closeMenu 1s forwards;
+        display: grid;
+        grid-template-rows: repeat(3, 27px) 1fr;
+        justify-items: center;
+        gap: 23px;
+        width: 100%;
+        max-width: 520px;
+        height: 100vh;
+        box-sizing: border-box;
+        padding-top: 159px;
+        opacity: 0;
+    }
+}
+
+.header__container_opened {
+    animation: openMenu 0.75s forwards;
+    right: 0;
+    opacity: 1;
+}
+
 .header__logo {
     width: 38px;
     height: 38px;
@@ -39,6 +128,7 @@
     background-repeat: no-repeat;
     background-image: url(../../images/logo.svg);
     align-self: start;
+    margin: 3px 0 3px;
 }
 
 .header__link {
@@ -56,8 +146,21 @@
     opacity: .6;
 }
 
+@media screen and (max-width: 768px) {
+    .header__link {
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
+
 .header__link_last {
     margin-left: 40px;
+}
+
+@media screen and (max-width: 768px) {
+    .header__link_last {
+        margin-left: 0;
+    }
 }
 
 .header__link_green {
@@ -84,16 +187,16 @@
     line-height: 16px;
 }
 
-@media screen and (max-width: 544px) {
+@media screen and (max-width: 768px) {
     .header__link_small-text {
-        font-size: 10px;
+        font-size: 12px;
         line-height: 16px;
     }
 }
 
-@media screen and (max-width: 768px) {
-    .header__link {
-        font-size: 12px;
+@media screen and (max-width: 544px) {
+    .header__link_small-text {
+        font-size: 10px;
         line-height: 16px;
     }
 }
@@ -114,4 +217,51 @@
     background-color: #313131;
     border-radius: 50%;
     margin-left: 7px;
+}
+
+.header__btn_menu {
+    display: none;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity .4s linear;
+    z-index: 3;
+}
+
+.header__btn_menu:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 768px) {
+    .header__btn_menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+    }
+}
+
+.header__btn_menu_active {
+    transform: scale(0.785) translateX(18px) translateY(11px);
+}
+
+.header__btn_menu_active .header__span:nth-of-type(1) {
+    animation: span1-active 0.75s forwards;
+}
+
+.header__btn_menu_active .header__span:nth-of-type(2) {
+    opacity: 0;
+}
+
+.header__btn_menu_active .header__span:nth-of-type(3) {
+    animation: span3-active 0.75s forwards;
+}
+
+.header__span {
+    width: 28px;
+    height: 3px;
+    background-color: #fff;
 }

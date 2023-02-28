@@ -1,24 +1,42 @@
-import {Link} from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import './Header.css'
 
+
 export default function Header({loggedIn}) {
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggler = () => setIsMenuOpen((state) => !state);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <header className={`header ${loggedIn ? '' : 'header_blue'}`}>
 
-      <Link className="header__link" to="/"><div className="header__logo"></div></Link>
-      {loggedIn && <div className="header__container">
+      <div
+        className={`header__overlay ${isMenuOpen && 'header__overlay_opened'}`}
+        onClick={closeMenu}
+      />
+      <Link className="header__link" to="/">
+        <div className="header__logo"></div>
+      </Link>
+      {loggedIn && <nav className={`header__container ${loggedIn && 'header__container_loggedIn'} header__container_hidden ${isMenuOpen && 'header__container_opened'}`}>
+        {isMenuOpen && <Link className="header__link" to="/">Главная</Link>}
         <Link className="header__link" to="/movies">Фильмы</Link>
         <Link className="header__link" to="/saved-movies">Сохраненные фильмы</Link>
         <Link className="header__link header__link_last" to="/profile">Аккаунт
           <div className="header__account-logo"></div></Link>
-      </div>}
-      {!loggedIn && <div className="header__container">
+      </nav>}
+      {!loggedIn && <nav className="header__container">
         <Link className="header__link_small-text header__link" to="/sign-up">Регистрация</Link>
         <Link className="header__link header__link_green header__link_small-text" to="/sign-in">Войти</Link>
-      </div>}
-
+      </nav>}
+      {loggedIn && <button className={`header__btn_menu ${isMenuOpen && 'header__btn_menu_active'}`}
+                           onClick={toggler}>
+        <span className="header__span"></span>
+        <span className="header__span"></span>
+        <span className="header__span"></span>
+      </button>}
     </header>
   );
 }

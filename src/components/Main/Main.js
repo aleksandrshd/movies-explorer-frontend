@@ -6,7 +6,7 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Footer from "../Footer/Footer";
 
-export default function Landing({loggedIn}) {
+export default function Main({loggedIn}) {
   return (
     <>
       <Header loggedIn={loggedIn}/>
