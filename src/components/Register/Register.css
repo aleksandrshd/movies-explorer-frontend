@@ -7,6 +7,12 @@
     margin: 0 auto;
 }
 
+@media screen and (max-width: 450px) {
+    .register__form {
+        max-width: 260px;
+    }
+}
+
 .register__logo {
     width: 38px;
     height: 38px;
@@ -18,12 +24,27 @@
     align-self: start;
 }
 
+@media screen and (max-width: 450px) {
+    .register__logo {
+        align-self: center;
+        margin-top: 56px;
+        margin-bottom: 50px;
+    }
+}
+
 .register__header {
     font-weight: 500;
     font-size: 24px;
     line-height: 29px;
     align-self: start;
     margin: 0 0 40px;
+}
+
+@media screen and (max-width: 450px) {
+    .register__header {
+        align-self: center;
+        margin: 0 0 80px;
+    }
 }
 
 .register__label {
@@ -46,7 +67,7 @@
     margin-bottom: 24px;
     font-weight: 500;
     color: #fff;
-    width: 396px;
+    width: 100%;
 }
 
 .register__input:last-of-type {
@@ -58,14 +79,14 @@
     min-height: 12px;
     font-size: 10px;
     line-height: 12px;
-    width: 396px;
+    width: 100%;
     text-align: start;
 }
 
 .register__button {
     background-color: #4285F4;
     color: #fff;
-    width: 396px;
+    width: 100%;
     height: 45px;
     border-radius: 3px;
     border: none;
@@ -79,11 +100,26 @@
     opacity: .6;
 }
 
+@media screen and (max-width: 450px) {
+    .register__button {
+        align-self: center;
+        margin-top: 222px;
+        font-size: 12px;
+    }
+}
+
 .register__caption {
     font-size: 14px;
     color: #8B8B8B;
     margin: 0;
     padding-top: 17px;
+}
+
+@media screen and (max-width: 450px) {
+    .register__caption {
+        font-size: 12px;
+        padding-top: 15px;
+    }
 }
 
 .register__link {

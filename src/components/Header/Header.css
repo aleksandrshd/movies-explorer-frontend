@@ -110,7 +110,7 @@
         max-width: 520px;
         height: 100vh;
         box-sizing: border-box;
-        padding-top: 159px;
+        padding-top: 158px;
         opacity: 0;
     }
 }
@@ -159,7 +159,10 @@
 
 @media screen and (max-width: 768px) {
     .header__link_last {
-        margin-left: 0;
+        margin: 0  auto 90px;
+        align-self: flex-end;
+        font-size: 13px;
+        line-height: 12px;
     }
 }
 
@@ -244,6 +247,13 @@
     }
 }
 
+@media screen and (max-width: 450px) {
+    .header__btn_menu {
+        width: 40px;
+        height: 43px;
+    }
+}
+
 .header__btn_menu_active {
     transform: scale(0.785) translateX(18px) translateY(11px);
 }
@@ -264,4 +274,10 @@
     width: 28px;
     height: 3px;
     background-color: #fff;
+}
+
+@media screen and (max-width: 450px) {
+    .header__span {
+        width: 22px;
+    }
 }

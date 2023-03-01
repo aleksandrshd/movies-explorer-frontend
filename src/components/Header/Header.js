@@ -23,7 +23,7 @@ export default function Header({loggedIn}) {
       {loggedIn && <nav className={`header__container ${loggedIn && 'header__container_loggedIn'} header__container_hidden ${isMenuOpen && 'header__container_opened'}`}>
         {isMenuOpen && <Link className="header__link" to="/">Главная</Link>}
         <Link className="header__link" to="/movies">Фильмы</Link>
-        <Link className="header__link" to="/saved-movies">Сохраненные фильмы</Link>
+        <Link className="header__link" to="/saved-movies">Сохранённые фильмы</Link>
         <Link className="header__link header__link_last" to="/profile">Аккаунт
           <div className="header__account-logo"></div></Link>
       </nav>}

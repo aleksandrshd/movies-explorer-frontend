@@ -4,6 +4,7 @@
   flex-direction: column;
   margin: 0 auto;
   color: #fff;
+  padding: 80px 0;
 }
 
 .films__list {
@@ -29,7 +30,7 @@
   font-size: 12px;
   transition: opacity .4s linear;
   cursor: pointer;
-  margin: 60px auto 80px;
+  margin: 60px auto 0;
   padding: 0;
   align-self: center;
 }
