@@ -30,7 +30,15 @@
   column-gap: 20px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1180px) {
+  .films__list {
+    grid-template-columns: repeat(3, minmax(270px,1fr));
+    row-gap: 30px;
+    column-gap: 30px;
+  }
+}
+
+@media screen and (max-width: 900px) {
   .films__list {
     grid-template-columns: repeat(2, minmax(339px,1fr));
     row-gap: 30px;
@@ -38,11 +46,17 @@
   }
 }
 
-@media screen and (max-width: 544px) {
+@media screen and (max-width: 720px) {
   .films__list {
     display: flex;
     flex-direction: column;
     gap: 34px;
+    max-width: 450px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .films__list {
     max-width: 300px;
   }
 }

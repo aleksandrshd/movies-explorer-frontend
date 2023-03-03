@@ -1,26 +1,14 @@
-@keyframes on {
-    0% {
-        right: 0px;
-    }
-    100% {
-        right: 17px;
-    }
-}
-
-@keyframes off {
-    0% {
-        right: 17px;
-    }
-    100% {
-        right: 2px;
-    }
-}
-
 .search {
     padding: 70px 0 69px;
     border-bottom: 1px solid #424242;
     max-width: 1140px;
     margin: 0 auto;
+}
+
+@media screen and (max-width: 1200px) {
+    .search {
+        max-width: 92%;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -30,10 +18,19 @@
     }
 }
 
+@media screen and (max-width: 750px) {
+    .search {
+        max-width: 92%;
+    }
+}
+
 @media screen and (max-width: 544px) {
     .search {
         padding: 80px 0 109px;
         max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
@@ -55,7 +52,7 @@
 
 @media screen and (max-width: 544px) {
     .search__form {
-        flex-wrap: wrap;
+        padding: 19px;
     }
 }
 
@@ -78,6 +75,12 @@
     }
 }
 
+@media screen and (max-width: 544px) {
+    .search__logo {
+        display: none;
+    }
+}
+
 .search__input {
     background-color: transparent;
     border: none;
@@ -96,7 +99,9 @@
 
 @media screen and (max-width: 544px) {
     .search__input {
-        max-width: 200px;
+        font-size: 14px;
+        max-width: 145px;
+        margin: 0;
     }
 }
 
@@ -130,45 +135,8 @@
     }
 }
 
-.search__label {
-    background-color: #3DDC84;
-    color: #fff;
-    width: 36px;
-    height: 20px;
-    border-radius: 20px;
-    border: none;
-    transition: opacity .4s linear;
-    cursor: pointer;
-    justify-self: end;
-    position: relative;
-}
-
-.search__label:hover {
-    opacity: .6;
-}
-
-.search__button-filter {
-    appearance: none;
-    outline: none;
-    border: none;
-    position: absolute;
-    background-color: #fff;
-    width: 16px;
-    height: 16px;
-    top: 2px;
-    right: 0;
-    border-radius: 50%;
-    animation: on 0.25s forwards;
-}
-
-.search__button-filter:checked {
-    animation: off 0.25s forwards;
-}
-
-.search__text-filter {
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 18px;
-    color: #fff;
-    margin: 0 4px 0 14px;
+@media screen and (max-width: 544px) {
+    .search__border {
+        display: none;
+    }
 }
