@@ -20,6 +20,12 @@
     display: flex;
 }
 
+@media screen and (max-width: 640px) {
+    .checkbox {
+        align-self: center;
+    }
+}
+
 .checkbox__label {
     background-color: #3DDC84;
     color: #fff;
@@ -61,4 +67,11 @@
     line-height: 18px;
     color: #fff;
     margin: 0 4px 0 14px;
+}
+
+@media screen and (max-width: 544px) {
+    .checkbox__text {
+        font-size: 11px;
+        margin: 0 0 0 14px;
+    }
 }
