@@ -1,7 +1,7 @@
-import './RadioButton.css';
+import './FilterCheckbox.css';
 
 
-export default function RadioButton() {
+export default function FilterCheckbox() {
 
   return (
     <div className="checkbox">

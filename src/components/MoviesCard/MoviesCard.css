@@ -74,6 +74,19 @@
     opacity: .5;
 }
 
+.movies__like-button_liked {
+    background-image: url(../../images/likebtn_liked.svg);
+}
+
+.movies__like-button_saved {
+    background-image: url(../../images/deletebtn.svg);
+    opacity: 0;
+}
+
+.movies__card:hover .movies__like-button_saved {
+    opacity: 1;
+}
+
 .movies__duration {
     font-weight: 400;
     font-size: 11px;

@@ -6,6 +6,8 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import Preloader from "../Preloader/Preloader";
 
+import { moviesArray } from "../../utils/constants";
+
 export default function Movies(loggedIn) {
 
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ export default function Movies(loggedIn) {
       {loading ? (
         <Preloader />
       ) : (
-        <MoviesCardList savedFilms={false}/>
+        <MoviesCardList moviesArray={moviesArray} savedFilms={false}/>
       )}
       <Footer />
     </>

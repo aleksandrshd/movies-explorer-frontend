@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 
 import './SearchForm.css';
 
-import RadioButton from "../RadioButton/RadioButton";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { debounce } from "../../utils/utils";
 
 export default function SearchForm() {
@@ -28,10 +28,10 @@ export default function SearchForm() {
         <div className="search__container">
           <button className="search__button">Найти</button>
           <div className="search__border"/>
-          {!mobile && <RadioButton />}
+          {!mobile && <FilterCheckbox />}
         </div>
       </div>
-      {mobile && <RadioButton/>}
+      {mobile && <FilterCheckbox/>}
     </div>
   );
 
