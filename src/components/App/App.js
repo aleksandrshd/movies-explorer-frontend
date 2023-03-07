@@ -14,7 +14,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const cbLogout = useCallback(() => {
     setLoggedIn(false);

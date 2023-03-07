@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import './Header.css'
 
@@ -10,8 +10,10 @@ export default function Header({loggedIn}) {
   const toggler = () => setIsMenuOpen((state) => !state);
   const closeMenu = () => setIsMenuOpen(false);
 
+  const location = useLocation();
+
   return (
-    <header className={`header ${loggedIn ? '' : 'header_blue'}`}>
+    <header className={`header ${(location.pathname === "/main") ? 'header_blue' : ''}`}>
 
       <div
         className={`header__overlay ${isMenuOpen && 'header__overlay_opened'}`}

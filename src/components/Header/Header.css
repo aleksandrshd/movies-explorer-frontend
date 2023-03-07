@@ -204,12 +204,6 @@
     }
 }
 
-@media screen and (max-width: 544px) {
-    .header__link {
-        font-size: 10px;
-    }
-}
-
 .header__account-logo {
     width: 26px;
     height: 26px;
