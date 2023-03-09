@@ -3,11 +3,15 @@ import {useEffect, useState} from "react";
 import './SearchForm.css';
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { debounce } from "../../utils/utils";
+import {debounce} from "../../utils/utils";
 
 export default function SearchForm() {
 
   const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    window.innerWidth < 640 ? setMobile(true) : setMobile(false);
+  }, [])
 
   useEffect(() => {
     const sizeListener = debounce(640, setMobile, false, true);
@@ -17,20 +21,21 @@ export default function SearchForm() {
 
   return (
     <div className="search">
-      <div className="search__form">
+      <form className="search__form">
         <div className="search__container">
           <div className="search__logo"/>
           <input
             className="search__input"
             name="film"
-            placeholder="Фильм"/>
+            placeholder="Фильм"
+            required/>
         </div>
         <div className="search__container">
           <button className="search__button">Найти</button>
           <div className="search__border"/>
-          {!mobile && <FilterCheckbox />}
+          {!mobile && <FilterCheckbox/>}
         </div>
-      </div>
+      </form>
       {mobile && <FilterCheckbox/>}
     </div>
   );

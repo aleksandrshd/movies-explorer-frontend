@@ -31,7 +31,7 @@ export default function Header({loggedIn}) {
       </nav>}
       {!loggedIn && <nav className="header__container">
         <Link className="header__link_small-text header__link" to="/sign-up">Регистрация</Link>
-        <Link className="header__link header__link_green header__link_small-text" to="/sign-in">Войти</Link>
+        <Link className="header__link_small-text header__link header__link_green " to="/sign-in">Войти</Link>
       </nav>}
       {loggedIn && <button className={`header__btn_menu ${isMenuOpen && 'header__btn_menu_active'}`}
                            onClick={toggler}>

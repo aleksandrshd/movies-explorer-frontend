@@ -24,19 +24,19 @@ export default function AboutMe() {
         <h4 className="student__subtitle student__subtitle_grey">Портфолио</h4>
         <ul className="student__list">
           <li className="student__list-item">
-            <a className="student__link" href="https://github.com/aleksandrshd/how-to-learn">
+            <a className="student__link" href="https://github.com/aleksandrshd/how-to-learn" target="_blank">
               <p className="student__link-text">Статичный сайт</p>
               <div className="student__link-logo"/>
             </a>
           </li>
           <li className="student__list-item">
-            <a className="student__link" href="https://github.com/aleksandrshd/russian-travel">
+            <a className="student__link" href="https://github.com/aleksandrshd/russian-travel" target="_blank">
               <p className="student__link-text">Адаптивный сайт</p>
               <div className="student__link-logo"/>
             </a>
           </li>
           <li className="student__list-item">
-            <a className="student__link" href="https://github.com/aleksandrshd/react-mesto-api-full">
+            <a className="student__link" href="https://github.com/aleksandrshd/react-mesto-api-full" target="_blank">
               <p className="student__link-text">Одностраничное приложение</p>
               <div className="student__link-logo"/>
             </a>
