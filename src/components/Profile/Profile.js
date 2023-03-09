@@ -6,15 +6,16 @@ export default function Profile({loggedIn, onLogout}) {
 
   return (
     <>
-      <Header loggedIn={loggedIn} />
-      <form className="profile__form"
+      <Header loggedIn={loggedIn}/>
+      <form className="profile"
             noValidate>
         <h2 className="profile__header">Привет, Виталий!</h2>
         <div className="profile__container">
-          <label className="profile__label" htmlFor="email">Имя</label>
+          <label className="profile__label" htmlFor="name">Имя</label>
           <input
             className="profile__input"
-            name="name"/>
+            name="name"
+            id="name"/>
         </div>
         <div className="profile__border"></div>
         <div className="profile__container">
@@ -22,7 +23,8 @@ export default function Profile({loggedIn, onLogout}) {
           <input
             className="profile__input"
             type="email"
-            name="name"/>
+            name="name"
+            id="email"/>
         </div>
         <span className="profile__error"></span>
         <button className="profile__button">Редактировать</button>
