@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useState} from "react";
 import {Redirect, Route, Switch, useLocation} from 'react-router-dom';
 
 import './App.css';
@@ -17,29 +17,19 @@ import Footer from "../Footer/Footer";
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(true);
+
   const location = useLocation();
+  const viewHeader = (location.pathname === "/main") ||
+    (location.pathname === "/movies") ||
+    (location.pathname === "/saved-movies") ||
+    (location.pathname === "/profile");
+  const viewFooter = (location.pathname === "/main") ||
+    (location.pathname === "/movies") ||
+    (location.pathname === "/saved-movies");
+
   const cbLogout = useCallback(() => {
     setLoggedIn(false);
   }, []);
-
-  let viewHeader;
-  let viewFooter;
-
-  useEffect(() => {
-    console.log(`location = ${location.pathname}`);
-
-    viewHeader = (location.pathname === "/main") ||
-      (location.pathname === "/movies") ||
-      (location.pathname === "/saved-movies") ||
-      (location.pathname === "/profile");
-
-    viewFooter = (location.pathname === "/main") ||
-      (location.pathname === "/movies") ||
-      (location.pathname === "/saved-movies");
-
-    console.log('viewHeader', viewHeader);
-    console.log('viewFooter', viewFooter);
-  }, [location]);
 
   return (
     <div className="App">

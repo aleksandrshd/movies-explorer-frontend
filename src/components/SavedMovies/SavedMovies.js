@@ -7,9 +7,9 @@ import {savedMoviesArray} from "../../utils/constants";
 
 export default function SavedMovies() {
   return (
-    <section className="saved-movies">
+    <div className="saved-movies">
       <SearchForm/>
       <MoviesCardList moviesArray={savedMoviesArray} savedFilms={true}/>
-    </section>
+    </div>
   );
 }
