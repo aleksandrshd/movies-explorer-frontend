@@ -22,7 +22,7 @@ export default function SearchForm() {
   return (
     <div className="search">
       <form className="search__form">
-        <div className="search__container">
+        <div className="search__container search__container_input">
           <div className="search__logo"/>
           <input
             className="search__input"
