@@ -17,36 +17,33 @@ import Footer from "../Footer/Footer";
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(true);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
-  const [isFooterVisible, setIsFooterVisible] = useState(false);
   const location = useLocation();
-
   const cbLogout = useCallback(() => {
     setLoggedIn(false);
   }, []);
 
+  let viewHeader;
+  let viewFooter;
 
   useEffect(() => {
-    console.log(location.pathname);
-    if ((location.pathname === "/main") ||
+    console.log(`location = ${location.pathname}`);
+
+    viewHeader = (location.pathname === "/main") ||
       (location.pathname === "/movies") ||
       (location.pathname === "/saved-movies") ||
-      (location.pathname === "/profile")) {
-      setIsHeaderVisible(true);
-    }
-    if ((location.pathname === "/main") ||
+      (location.pathname === "/profile");
+
+    viewFooter = (location.pathname === "/main") ||
       (location.pathname === "/movies") ||
-      (location.pathname === "/saved-movies")) {
-      setIsFooterVisible(true);
-    }
-    ;
+      (location.pathname === "/saved-movies");
 
+    console.log('viewHeader', viewHeader);
+    console.log('viewFooter', viewFooter);
   }, [location]);
-
 
   return (
     <div className="App">
-      {isHeaderVisible && <Header loggedIn={loggedIn}/>}
+      {viewHeader && <Header loggedIn={loggedIn}/>}
       <main>
         <Switch>
           <ProtectedRoute path="/main"
@@ -76,7 +73,7 @@ function App() {
           </Route>
         </Switch>
       </main>
-      {isFooterVisible && <Footer/>}
+      {viewFooter && <Footer/>}
     </div>
   );
 }
