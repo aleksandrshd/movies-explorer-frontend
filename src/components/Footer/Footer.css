@@ -1,0 +1,113 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 544px) {
+    .footer {
+        padding: 0 10px;
+    }
+}
+
+.footer__header {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #8B8B8B;
+    margin: 80px auto 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .footer__header {
+        margin: 48px auto 20px;
+    }
+}
+
+@media screen and (max-width: 544px) {
+    .footer__header {
+        font-size: 12px;
+        line-height: 15px;
+        margin: 79px auto 21px;
+    }
+}
+
+.footer__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #424242;
+    padding: 18px 0 20px;
+}
+
+@media screen and (max-width: 544px) {
+    .footer__container {
+        flex-direction: column-reverse;
+        gap: 30px;
+        padding-top: 30px;
+    }
+}
+
+.footer__copyright {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #fff;
+    margin: 0;
+    justify-self: start;
+}
+
+@media screen and (max-width: 544px) {
+    .footer__copyright {
+        font-size: 12px;
+        line-height: 15px;
+        color: #8B8B8B;
+        justify-self: center;
+    }
+}
+
+@media screen and (max-width: 544px) {
+    .footer__links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+}
+
+.footer__link {
+    text-decoration: none;
+    color: #fff;
+    transition: opacity .4s linear;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.footer__link:hover {
+    opacity: .6;
+}
+
+.footer__link:last-of-type {
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 544px) {
+    .footer__link {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
+
+@media screen and (max-width: 544px) {
+    .footer__link:last-of-type {
+        margin-left: 0;
+    }
+}

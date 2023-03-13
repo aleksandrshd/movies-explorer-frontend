@@ -1,0 +1,160 @@
+.project {
+  padding: 112px 70px 97px;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .project {
+    padding: 92px 50px 77px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .project {
+    padding: 70px 18px;
+  }
+}
+
+.project__header {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+@media screen and (max-width: 544px) {
+  .project__header {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.project__border {
+  height: 1px;
+  background-color: #DADADA;
+  margin: 23px 0 70px;
+}
+
+@media screen and (max-width: 544px) {
+  .project__border {
+    margin: 28px 0 60px;
+  }
+}
+
+.project__container {
+  display: flex;
+  gap: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .project__container {
+    gap: 32px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .project__container {
+    flex-direction: column;
+    gap: 56px;
+    padding-bottom: 60px;
+  }
+}
+
+.project__title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+@media screen and (max-width: 544px) {
+  .project__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.project__paragraph {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 550px;
+  margin: 26px 0 110px;
+}
+
+@media screen and (max-width: 768px) {
+  .project__paragraph {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 22px 0 93px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .project__paragraph {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 16px 0 0;
+  }
+}
+
+.project__about-container {
+  display: flex;
+}
+
+.project__about {
+  width: 228px;
+  line-height: 36px;
+  background-color: #3DDC84;
+  margin: 0;
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
+}
+
+@media screen and (max-width: 768px) {
+  .project__about {
+    width: 140px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .project__about {
+    width: 100px;
+    font-size: 11px;
+  }
+}
+
+.project__about_front {
+  width: 912px;
+  background-color: #303030;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .project__about_front {
+    width: 528px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .project__about_front {
+    width: 184px;
+  }
+}
+
+.project__about_transparent {
+  background-color: transparent;
+  font-weight: 500;
+  color: #8B8B8B;
+  line-height: 44px;
+}
+
+@media screen and (max-width: 544px) {
+  .project__about_transparent {
+    line-height: 31px;
+  }
+}
