@@ -96,9 +96,9 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
     setFormData({
       ...formData, [name]: value
     });
-    console.log(formData);
-    console.log(isInvalid);
-    console.log(formErrors);
+    console.log('formData', formData);
+    console.log('formErrors', formErrors);
+    console.log('isInvalid', isInvalid);
   }, [formData]);
 
   const cbBlur = useCallback((event) => {
@@ -155,7 +155,7 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
       <span className="register__error">{textNameError}</span>
       <span className="register__error">{textEmailError}</span>
       <span className="register__error">{textPasswordError}</span>
-      <button className={`register__button (${isInvalid} ? 'register__button_disabled' : '')`} disabled={isInvalid}>{isRegister ? 'Зарегистрироваться' : 'Войти'}</button>
+      <button className={`register__button ${isInvalid ? 'register__button_disabled' : ''}`} disabled={isInvalid}>{isRegister ? 'Зарегистрироваться' : 'Войти'}</button>
       {isRegister && <p className="register__caption">Уже зарегистрированы? <Link className="register__link"
                                                                                   to="/sign-in">Войти</Link>
       </p>}

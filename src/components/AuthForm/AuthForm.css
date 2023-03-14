@@ -113,7 +113,7 @@
     cursor: auto;
 }
 
-.register__button:hover {
+.register__button_disabled:hover {
     opacity: 1;
 }
 

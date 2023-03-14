@@ -69,3 +69,5 @@ export const savedMoviesArray = [
     "duration": "1ч 42м"
   }
 ];
+
+export const CHANGE_USERDATA_ERROR_MESSAGE = 'При обновлении данных профиля произошла ошибка.';

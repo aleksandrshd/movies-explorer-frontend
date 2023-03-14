@@ -4,18 +4,6 @@ const regexEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^
 // валидаторы
 const validators = {
   name: {
-    /*empty: (value) => {
-      return value === '';
-    },
-    minLength: (value) => {
-      return value.length < 2;
-    },
-    maxLength: (value) => {
-      return value.length > 40;
-    }*/
-  },
-
-  description: {
     empty: (value) => {
       return value === '';
     },
@@ -23,7 +11,7 @@ const validators = {
       return value.length < 2;
     },
     maxLength: (value) => {
-      return value.length > 200;
+      return value.length > 40;
     }
   },
 
@@ -46,7 +34,9 @@ const validators = {
 // тексты ошибок валидации
 const textsOfErrors = {
   name: {
-    emptyNameTextError: 'Введите имя'
+    emptyNameTextError: 'Введите имя',
+    minLengthNameTextError: 'Введите имя длиной не менее 2 символов',
+    maxLengthNameTextError: 'Введите имя длиной не более 40 символов',
   },
   email: {
     isEmailTextError: 'Введите корректный email'

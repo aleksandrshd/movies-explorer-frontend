@@ -12,13 +12,17 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import * as auth from "../../utils/MainApi";
+
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import * as api from "../../utils/MainApi";
+import {CHANGE_USERDATA_ERROR_MESSAGE} from "../../utils/constants";
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
   const [userData, setUserData] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
 
   const location = useLocation();
   const viewHeader = (location.pathname === "/main") ||
@@ -31,7 +35,7 @@ function App() {
 
   const cbRegister = useCallback(async (name, email, password) => {
     try {
-      const data = await auth.register(name, email, password);
+      const data = await api.register(name, email, password);
       if (data) {
         setRegistrationSuccessful(true);
       }
@@ -42,7 +46,7 @@ function App() {
 
   const cbLogin = useCallback(async (name, email, password) => {
     try {
-      const data = await auth.login(email, password);
+      const data = await api.login(email, password);
       if (data.token) {
         setLoggedIn(true);
         localStorage.setItem('jwt', data.token);
@@ -60,20 +64,29 @@ function App() {
       if (!jwt) {
         throw new Error('No token in storage');
       }
-      const user = await auth.checkToken(jwt);
+      const user = await api.checkToken(jwt);
 
       if (!user) {
         throw new Error('Invalid user');
       }
 
       setLoggedIn(true);
-      console.log('user', user);
       setUserData(user);
-      console.log('userData', userData);
 
     } catch {
     } finally {
       /*setAppLoading(false);*/
+    }
+  }, []);
+
+  const cbChangeUserData = useCallback(async (name, email) => {
+    try {
+      setErrorMessage('');
+      const user = await api.changeUserData(name, email);
+      setUserData(user);
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(CHANGE_USERDATA_ERROR_MESSAGE);
     }
   }, []);
 
@@ -87,45 +100,57 @@ function App() {
     cbTokenCheck();
   }, []);
 
+  useEffect(() => {
+    if (userData) {
+      console.log('userData', userData)
+    }
+  }, [userData]);
+
   return (
-    <div className="App">
-      {viewHeader && <Header loggedIn={loggedIn}/>}
-      <main>
-        <Switch>
-          <ProtectedRoute path="/main"
-                          loggedIn={loggedIn}
-                          component={Main}/>
-          <Route path="/sign-in">
-            <AuthForm loggedIn={loggedIn}
-                      isRegister={false}
-                      onSubmit={cbLogin}/>
-          </Route>
-          <Route path="/sign-up">
-            <AuthForm loggedIn={loggedIn}
-                      isRegister={true}
-                      registrationSuccessful={registrationSuccessful}
-                      onSubmit={cbRegister}/>
-          </Route>
-          <ProtectedRoute path="/movies"
-                          loggedIn={loggedIn}
-                          component={Movies}/>
-          <ProtectedRoute path="/saved-movies"
-                          loggedIn={loggedIn}
-                          component={SavedMovies}/>
-          <ProtectedRoute path="/profile"
-                          loggedIn={loggedIn}
-                          component={Profile}
-                          onLogout={cbLogout}/>
-          <Route exact path="/">
-            {loggedIn ? <Redirect to="/main"/> : <Redirect to="/sign-in"/>}
-          </Route>
-          <Route path="*">
-            <PageNotFound/>
-          </Route>
-        </Switch>
-      </main>
-      {viewFooter && <Footer/>}
-    </div>
+
+    <CurrentUserContext.Provider value={userData}>
+
+      <div className="App">
+        {viewHeader && <Header loggedIn={loggedIn}/>}
+        <main>
+          <Switch>
+            <ProtectedRoute path="/main"
+                            loggedIn={loggedIn}
+                            component={Main}/>
+            <Route path="/sign-in">
+              <AuthForm loggedIn={loggedIn}
+                        isRegister={false}
+                        onSubmit={cbLogin}/>
+            </Route>
+            <Route path="/sign-up">
+              <AuthForm loggedIn={loggedIn}
+                        isRegister={true}
+                        registrationSuccessful={registrationSuccessful}
+                        onSubmit={cbRegister}/>
+            </Route>
+            <ProtectedRoute path="/movies"
+                            loggedIn={loggedIn}
+                            component={Movies}/>
+            <ProtectedRoute path="/saved-movies"
+                            loggedIn={loggedIn}
+                            component={SavedMovies}/>
+            <ProtectedRoute path="/profile"
+                            loggedIn={loggedIn}
+                            component={Profile}
+                            errorMessage={errorMessage}
+                            onSubmit={cbChangeUserData}
+                            onLogout={cbLogout}/>
+            <Route exact path="/">
+              {loggedIn ? <Redirect to="/main"/> : <Redirect to="/sign-in"/>}
+            </Route>
+            <Route path="*">
+              <PageNotFound/>
+            </Route>
+          </Switch>
+        </main>
+        {viewFooter && <Footer/>}
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

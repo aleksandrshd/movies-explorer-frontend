@@ -33,4 +33,17 @@ export const checkToken = async (token) => {
   return checkResponse(res);
 };
 
+export const changeUserData = async (name, email) => {
+  const jwt = localStorage.getItem('jwt');
+  const res = await fetch(`${BASE_URL}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      authorization: `Bearer ${jwt}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({name, email})
+  });
+  return checkResponse(res);
+};
+
 const checkResponse = res => res.ok ? res.json() : Promise.reject(`Error: ${res.statusText}`);
