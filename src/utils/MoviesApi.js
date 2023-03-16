@@ -1,6 +1,8 @@
+import {checkResponse} from "./MainApi";
+
 export const BASE_URL = 'https://api.nomoreparties.co';
 
-export const getAllFilms = async (token) => {
+export const getAllMovies = async () => {
   const res = await fetch(`${BASE_URL}/beatfilm-movies`, {
     method: 'GET',
     headers: {
@@ -9,5 +11,3 @@ export const getAllFilms = async (token) => {
   });
   return checkResponse(res);
 };
-
-const checkResponse = res => res.ok ? res.json() : Promise.reject(`Error: ${res.statusText}`);

@@ -1,11 +1,21 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 import './SearchForm.css';
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import {debounce} from "../../utils/utils";
+import useSearchForm from "../../hooks/useSearchForm";
 
-export default function SearchForm() {
+export default function SearchForm({ filterOn, setFilterOn, keyWord, setKeyWord }) {
+
+  const { value, setValue, searchEmpty, handleChange, handleSubmit } = useSearchForm(setKeyWord);
+
+  useEffect(() => {
+    if (keyWord) setValue(keyWord);
+    console.log(value);
+  }, [keyWord]);
+
+  const toggleFilter = useCallback((e) => setFilterOn(e.target.checked), []);
 
   const [mobile, setMobile] = useState(false);
 
@@ -21,14 +31,16 @@ export default function SearchForm() {
 
   return (
     <div className="search">
-      <form className="search__form">
+      <form className="search__form" onSubmit={handleSubmit}>
         <div className="search__container search__container_input">
           <div className="search__logo"/>
           <input
             className="search__input"
             name="film"
-            placeholder="Фильм"
-            required/>
+            type="text"
+            value={value}
+            onChange={handleChange}
+            placeholder="Фильм"/>
         </div>
         <div className="search__container">
           <button className="search__button">Найти</button>
@@ -37,6 +49,7 @@ export default function SearchForm() {
         </div>
       </form>
       {mobile && <FilterCheckbox/>}
+      <span className="search__error">{searchEmpty && 'Введите ключевое слово'}</span>
     </div>
   );
 

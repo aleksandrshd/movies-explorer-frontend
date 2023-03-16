@@ -46,4 +46,4 @@ export const changeUserData = async (name, email) => {
   return checkResponse(res);
 };
 
-const checkResponse = res => res.ok ? res.json() : Promise.reject(`Error: ${res.statusText}`);
+export const checkResponse = res => res.ok ? res.json() : Promise.reject(`Error: ${res.statusText}`);

@@ -13,9 +13,10 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as api from "../../utils/MainApi";
-import {CHANGE_USERDATA_ERROR_MESSAGE} from "../../utils/constants";
+import { getAllMovies } from '../../utils/MoviesApi';
+import { CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE } from "../../utils/constants";
 
 function App() {
 
@@ -50,7 +51,7 @@ function App() {
       if (data.token) {
         setLoggedIn(true);
         localStorage.setItem('jwt', data.token);
-        cbTokenCheck(); // для получения email пользователя
+        cbTokenCheck();
       }
     } catch (error) {
       console.log(error);
@@ -87,6 +88,17 @@ function App() {
     } catch (error) {
       console.log(error);
       setErrorMessage(CHANGE_USERDATA_ERROR_MESSAGE);
+    }
+  }, []);
+
+  const cbGetDefaultMovies = useCallback(async () => {
+    try {
+      setErrorMessage('');
+      const movies = await getAllMovies();
+      return movies;
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(LOAD_MOVIES_ERROR_MESSAGE);
     }
   }, []);
 
@@ -130,6 +142,7 @@ function App() {
             </Route>
             <ProtectedRoute path="/movies"
                             loggedIn={loggedIn}
+                            getDefaultMovies={cbGetDefaultMovies}
                             component={Movies}/>
             <ProtectedRoute path="/saved-movies"
                             loggedIn={loggedIn}

@@ -71,3 +71,8 @@ export const savedMoviesArray = [
 ];
 
 export const CHANGE_USERDATA_ERROR_MESSAGE = 'При обновлении данных профиля произошла ошибка.';
+
+export const LOAD_MOVIES_ERROR_MESSAGE =
+  'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.';
+
+export const ALL_MOVIES_KEY = 'allMovies';
