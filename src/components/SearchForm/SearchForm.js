@@ -12,7 +12,6 @@ export default function SearchForm({ filterOn, setFilterOn, keyWord, setKeyWord 
 
   useEffect(() => {
     if (keyWord) setValue(keyWord);
-    console.log(value);
   }, [keyWord]);
 
   const toggleFilter = useCallback((e) => setFilterOn(e.target.checked), []);

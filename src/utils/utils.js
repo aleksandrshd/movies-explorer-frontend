@@ -44,7 +44,7 @@ export const wordFilter = (word, movie) => {
 };
 
 export const shortFilter = (shortDuration, movie) => {
-  return movie.duration > shortDuration;
+  return movie.duration < shortDuration;
 };
 
 export const convertDuration = (duration) => {

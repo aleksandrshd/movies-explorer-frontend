@@ -4,7 +4,6 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 
-import {moviesArray} from "../../utils/constants";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {getAllDefaultMovies, shortFilter, wordFilter} from "../../utils/utils";
 
@@ -29,8 +28,10 @@ export default function Movies({getDefaultMovies}) {
     const getResult = async () => {
 
       const allMovies = await getAllDefaultMovies(getDefaultMovies, setLoading);
-      setFoundMoviesArray(allMovies.filter((item) => wordFilter(keyWord, item)));
-      console.log('foundMoviesArray : ', foundMoviesArray);
+
+      if (filterOn) {
+        setFoundMoviesArray(allMovies.filter(movie => wordFilter(keyWord, movie)).filter(movie => shortFilter(40, movie)));
+      } else {setFoundMoviesArray(allMovies.filter((movie) => wordFilter(keyWord, movie)));}
 
       localStorage.setItem(
         storageKey,
