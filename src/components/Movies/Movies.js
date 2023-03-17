@@ -6,7 +6,7 @@ import Preloader from "../Preloader/Preloader";
 
 import {moviesArray} from "../../utils/constants";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
-import {getAllDefaultMovies, wordFilter} from "../../utils/utils";
+import {getAllDefaultMovies, shortFilter, wordFilter} from "../../utils/utils";
 
 export default function Movies({getDefaultMovies}) {
 
@@ -50,7 +50,7 @@ export default function Movies({getDefaultMovies}) {
   return (
     <>
       <SearchForm isFilterOn={filterOn}
-                  setIsFilterOn={setFilterOn}
+                  setFilterOn={setFilterOn}
                   keyWord={keyWord}
                   setKeyWord={setKeyWord}/>
       {loading ? (

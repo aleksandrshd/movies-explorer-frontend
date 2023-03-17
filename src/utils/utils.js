@@ -32,7 +32,7 @@ export const getAllDefaultMovies = async (getMovies, setLoading) => {
 };
 
 export const wordFilter = (word, movie) => {
-  const { country, director, description, nameRU, nameEN } = movie;
+  const {country, director, description, nameRU, nameEN} = movie;
   const search = new RegExp(word, 'i');
   return (
     search.test(country) ||
@@ -41,4 +41,17 @@ export const wordFilter = (word, movie) => {
     search.test(nameRU) ||
     search.test(nameEN)
   );
+};
+
+export const shortFilter = (shortDuration, movie) => {
+  return movie.duration > shortDuration;
+};
+
+export const convertDuration = (duration) => {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration - hours * 60;
+  return {
+    hours,
+    minutes
+  };
 };

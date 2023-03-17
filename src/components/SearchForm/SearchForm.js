@@ -45,10 +45,10 @@ export default function SearchForm({ filterOn, setFilterOn, keyWord, setKeyWord 
         <div className="search__container">
           <button className="search__button">Найти</button>
           <div className="search__border"/>
-          {!mobile && <FilterCheckbox/>}
+          {!mobile && <FilterCheckbox value={filterOn} onChange={toggleFilter}/>}
         </div>
       </form>
-      {mobile && <FilterCheckbox/>}
+      {mobile && <FilterCheckbox value={filterOn} onChange={toggleFilter}/>}
       <span className="search__error">{searchEmpty && 'Введите ключевое слово'}</span>
     </div>
   );

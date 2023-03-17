@@ -115,7 +115,7 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
   }, [onSubmit, formData]);
 
   if (loggedIn || registrationSuccessful) {
-    return <Redirect to="/"/>;
+    return <Redirect to="/movies"/>;
   }
 
   return (

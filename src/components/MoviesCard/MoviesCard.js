@@ -1,4 +1,5 @@
 import './MoviesCard.css';
+import {convertDuration} from "../../utils/utils";
 
 export default function MoviesCard({data, isLiked, savedFilms}) {
   return (
@@ -11,7 +12,7 @@ export default function MoviesCard({data, isLiked, savedFilms}) {
         <button className={`movie__like-button ${isLiked ? 'movie__like-button_liked' : ''} ${savedFilms ? 'movie__like-button_saved' : ''}`}
                 type="button"/>
       </div>
-      <p className="movie__duration">{data.duration}</p>
+      <p className="movie__duration">{convertDuration(data.duration).hours > 0 && `${convertDuration(data.duration).hours}ч `}{ `${convertDuration(data.duration).minutes}м`}</p>
     </li>
   );
 }
