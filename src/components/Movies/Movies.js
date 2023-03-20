@@ -11,11 +11,13 @@ export default function Movies({getDefaultMovies}) {
 
   const currentUser = useContext(CurrentUserContext);
   const storageKey = currentUser._id;
+  const [allMovies, setAllMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filterOn, setFilterOn] = useState(false);
   const [keyWord, setKeyWord] = useState('');
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
 
+  // Восстановили конфигурацию из хранилища
   useEffect(() => {
     if (localStorage.getItem(storageKey)) {
       const config = JSON.parse(localStorage.getItem(storageKey));
@@ -24,29 +26,36 @@ export default function Movies({getDefaultMovies}) {
     }
   }, []);
 
+  // Сохраняем конфигурацию при изменении фильтров
   useEffect(() => {
-    const getResult = async () => {
-
-      const allMovies = await getAllDefaultMovies(getDefaultMovies, setLoading);
-
-      if (filterOn) {
-        setFoundMoviesArray(allMovies.filter(movie => wordFilter(keyWord, movie)).filter(movie => shortFilter(40, movie)));
-      } else {setFoundMoviesArray(allMovies.filter((movie) => wordFilter(keyWord, movie)));}
-
-      localStorage.setItem(
+    localStorage.setItem(
         storageKey,
         JSON.stringify({
           filterOn,
           keyWord,
         }),
-      );
-
-      setLoading(false);
-    };
-
-    if (keyWord !== '') getResult();
-
+    );
   }, [keyWord, filterOn]);
+
+  // Один раз загрузили список в начале работы страницы и больше не трогаем его.
+  useEffect(async () => {
+    const movies = await getAllDefaultMovies(getDefaultMovies, setLoading);
+    setAllMovies(movies);
+
+  }, []);
+
+  // Здесь только фильтрация
+  useEffect(() => {
+    let filteredMovies = keyWord ? allMovies.filter((movie) => wordFilter(keyWord, movie)) : allMovies;
+
+    if (filterOn) {
+      filteredMovies = filteredMovies.filter(movie => shortFilter(40, movie));
+    }
+
+    setFoundMoviesArray(filteredMovies);
+  }, [allMovies, keyWord, filterOn]);
+
+
 
   return (
     <>
