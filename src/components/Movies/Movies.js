@@ -24,7 +24,7 @@ export default function Movies({getDefaultMovies}) {
       setFilterOn(config.filterOn);
       setKeyWord(config.keyWord);
     }
-  }, []);
+  }, [storageKey]);
 
   // Сохраняем конфигурацию при изменении фильтров
   useEffect(() => {
@@ -38,11 +38,13 @@ export default function Movies({getDefaultMovies}) {
   }, [keyWord, filterOn]);
 
   // Один раз загрузили список в начале работы страницы и больше не трогаем его.
-  useEffect(async () => {
-    const movies = await getAllDefaultMovies(getDefaultMovies, setLoading);
-    setAllMovies(movies);
-
-  }, []);
+  useEffect( () => {
+    const getAllMovies = async () => {
+      const movies = await getAllDefaultMovies(getDefaultMovies, setLoading);
+      setAllMovies(movies);
+    }
+    getAllMovies();
+  }, [getDefaultMovies]);
 
   // Здесь только фильтрация
   useEffect(() => {
@@ -59,7 +61,7 @@ export default function Movies({getDefaultMovies}) {
 
   return (
     <>
-      <SearchForm isFilterOn={filterOn}
+      <SearchForm filterOn={filterOn}
                   setFilterOn={setFilterOn}
                   keyWord={keyWord}
                   setKeyWord={setKeyWord}/>
