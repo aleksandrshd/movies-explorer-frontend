@@ -26,4 +26,53 @@ export const LOAD_MOVIES_ERROR_MESSAGE =
 
 export const ALL_MOVIES_KEY = 'allMovies';
 
+export const INITIAL_STATES = {
+  REGISTER: {
+    FORM_DATA: {
+      name: '',
+      email: '',
+      password: ''
+    },
+    CLICKED_DATA: {
+      name: false,
+      email: false,
+      password: false
+    },
+    ERRORS_DATA: {
+      name: {
+        empty: true,
+        minLength: true,
+        maxLength: true
+      },
+      email: {
+        isEmail: true
+      },
+      password: {
+        empty: true,
+        minLength: true
+      }
+    }
+  },
+
+  LOGIN: {
+    FORM_DATA: {
+      email: '',
+      password: ''
+    },
+    CLICKED_DATA: {
+      email: false,
+      password: false
+    },
+    ERRORS_DATA: {
+      email: {
+        isEmail: true
+      },
+      password: {
+        empty: true,
+        minLength: true
+      }
+    }
+  }
+}
+
 

@@ -5,40 +5,36 @@ import {Link, Redirect} from "react-router-dom";
 import './AuthForm.css'
 
 import {textsOfErrors, validators} from "../../utils/validators";
+import {INITIAL_STATES} from "../../utils/constants";
 
 
 export default function AuthForm({loggedIn, isRegister, registrationSuccessful, onSubmit}) {
 
-  const [formData, setFormData] = useState({
-      name: '',
-      email: '',
-      password: ''
-    }
-  );
-
-  const [formDataClicked, setFormDataClicked] = useState({
-      name: false,
-      email: false,
-      password: false
-    }
-  );
-
-  const [formErrors, setFormErrors] = useState({
-    name: {},
-    email: {
-      isEmail: true
-    },
-    password: {
-      empty: true,
-      minLength: true
-    }
-  });
+  const [formData, setFormData] = useState({});
+  const [formDataClicked, setFormDataClicked] = useState({});
+  const [formErrors, setFormErrors] = useState({});
 
   const [textNameError, setTextNameError] = useState('');
   const [textEmailError, setTextEmailError] = useState('');
   const [textPasswordError, setTextPasswordError] = useState('');
 
   const [isInvalid, setIsInvalid] = useState(true);
+
+  useEffect(() => {
+    if (isRegister) {
+      setFormData(INITIAL_STATES.REGISTER.FORM_DATA);
+      setFormDataClicked(INITIAL_STATES.REGISTER.CLICKED_DATA);
+      setFormErrors(INITIAL_STATES.REGISTER.ERRORS_DATA);
+    } else {
+      setFormData(INITIAL_STATES.LOGIN.FORM_DATA);
+      setFormDataClicked(INITIAL_STATES.LOGIN.CLICKED_DATA);
+      setFormErrors(INITIAL_STATES.LOGIN.ERRORS_DATA);
+    }
+  }, [isRegister]);
+
+  console.log('formData', formData);
+  console.log('formDataClicked', formDataClicked);
+  console.log('formErrors', formErrors);
 
   useEffect(() => {
     const formKeys = Object.keys(formData);
@@ -75,9 +71,11 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
 
   useEffect(() => {
 
-    if (formErrors.name.empty && formDataClicked.name) {
-      setTextNameError(textsOfErrors.name.emptyNameTextError);
-    } else setTextNameError('');
+    if (isRegister) {
+      if (formErrors.name.empty && formDataClicked.name) {
+        setTextNameError(textsOfErrors.name.emptyNameTextError);
+      } else setTextNameError('');
+    }
 
     if (formErrors.email.isEmail && formDataClicked.email) {
       setTextEmailError(textsOfErrors.email.isEmailTextError);
