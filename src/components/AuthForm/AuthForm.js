@@ -32,10 +32,6 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
     }
   }, [isRegister]);
 
-  console.log('formData', formData);
-  console.log('formDataClicked', formDataClicked);
-  console.log('formErrors', formErrors);
-
   useEffect(() => {
     const formKeys = Object.keys(formData);
 
@@ -72,21 +68,30 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
   useEffect(() => {
 
     if (isRegister) {
-      if (formErrors.name.empty && formDataClicked.name) {
-        setTextNameError(textsOfErrors.name.emptyNameTextError);
-      } else setTextNameError('');
+      if (formDataClicked.name) {
+        if (formErrors.name.empty) {
+          setTextNameError(textsOfErrors.name.emptyNameTextError);
+        } else if (formErrors.name.minLength) {
+          setTextNameError(textsOfErrors.name.minLengthNameTextError);
+        } else if (formErrors.name.maxLength) {
+          setTextNameError(textsOfErrors.name.maxLengthNameTextError);
+        } else setTextNameError('');
+      }
     }
 
-    if (formErrors.email.isEmail && formDataClicked.email) {
-      setTextEmailError(textsOfErrors.email.isEmailTextError);
-    } else setTextEmailError('');
+    if (formDataClicked.email) {
+      if (formErrors.email.isEmail) {
+        setTextEmailError(textsOfErrors.email.isEmailTextError);
+      } else setTextEmailError('');
+    }
 
-    if (formErrors.password.empty && formDataClicked.password) {
-      setTextPasswordError(textsOfErrors.password.emptyTextError);
-    } else if (formErrors.password.minLength && formDataClicked.password) {
-      setTextPasswordError(textsOfErrors.password.minLengthTextError);
-    } else setTextPasswordError('');
-
+    if (formDataClicked.password) {
+      if (formErrors.password.empty) {
+        setTextPasswordError(textsOfErrors.password.emptyTextError);
+      } else if (formErrors.password.minLength) {
+        setTextPasswordError(textsOfErrors.password.minLengthTextError);
+      } else setTextPasswordError('');
+    }
   }, [formErrors, formDataClicked]);
 
   const cbChange = useCallback((event) => {
@@ -94,9 +99,7 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
     setFormData({
       ...formData, [name]: value
     });
-    console.log('formData', formData);
-    console.log('formErrors', formErrors);
-    console.log('isInvalid', isInvalid);
+
   }, [formData]);
 
   const cbBlur = useCallback((event) => {
@@ -153,12 +156,13 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
       <span className="register__error">{textNameError}</span>
       <span className="register__error">{textEmailError}</span>
       <span className="register__error">{textPasswordError}</span>
-      <button className={`register__button ${isInvalid ? 'register__button_disabled' : ''}`} disabled={isInvalid}>{isRegister ? 'Зарегистрироваться' : 'Войти'}</button>
+      <button className={`register__button ${isInvalid ? 'register__button_disabled' : ''}`}
+              disabled={isInvalid}>{isRegister ? 'Зарегистрироваться' : 'Войти'}</button>
       {isRegister && <p className="register__caption">Уже зарегистрированы? <Link className="register__link"
                                                                                   to="/sign-in">Войти</Link>
       </p>}
       {!isRegister && <p className="register__caption">Ещё не зарегистрированы? <Link className="register__link"
-                                                                                   to="/sign-up">Регистрация</Link>
+                                                                                      to="/sign-up">Регистрация</Link>
       </p>}
     </form>
   );
