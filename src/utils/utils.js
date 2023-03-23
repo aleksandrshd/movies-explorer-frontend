@@ -11,7 +11,24 @@ export const debounce = (size, setter, bigScreenParam, smallScreenParam) => {
       setter(smallScreenParam);
     }
     isCooldown = true;
-    setTimeout(() => (isCooldown = false), 100);
+    setTimeout(() => (isCooldown = false), 200);
+  };
+};
+
+export const setDeviceTypeFn = (mobileRes, tabletRes, setter) => {
+  let isCooldown = false;
+
+  return (e) => {
+    if (isCooldown) return;
+    if (e.target.innerWidth < mobileRes) {
+      setter('mobile');
+    } else if ((e.target.innerWidth >= mobileRes) && (e.target.innerWidth < tabletRes)) {
+      setter('tablet');
+    } else if (e.target.innerWidth >= tabletRes) {
+      setter('desktop');
+    }
+    isCooldown = true;
+    setTimeout(() => (isCooldown = false), 200);
   };
 };
 

@@ -2,7 +2,7 @@ import './MoviesCardList.css';
 
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList({moviesArray, savedFilms}) {
+export default function MoviesCardList({moviesArray, savedFilms, onAddBtnClick, addBtnVisible}) {
   return (
       <section className="films">
         <ul className="films__list">
@@ -10,7 +10,7 @@ export default function MoviesCardList({moviesArray, savedFilms}) {
             <MoviesCard id={item.id} key={item.id} data={item} savedFilms={savedFilms}/>
           ))}
         </ul>
-        {!savedFilms && <button className="films__button-more">Ещё</button>}
+        {!savedFilms && addBtnVisible && <button className="films__button-more" onClick={onAddBtnClick}>Ещё</button>}
       </section>
   );
 }

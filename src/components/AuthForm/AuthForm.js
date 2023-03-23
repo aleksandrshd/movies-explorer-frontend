@@ -30,6 +30,18 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
       setFormDataClicked(INITIAL_STATES.LOGIN.CLICKED_DATA);
       setFormErrors(INITIAL_STATES.LOGIN.ERRORS_DATA);
     }
+  }, []);
+
+  useEffect(() => {
+    if (isRegister) {
+      setFormData(INITIAL_STATES.REGISTER.FORM_DATA);
+      setFormDataClicked(INITIAL_STATES.REGISTER.CLICKED_DATA);
+      setFormErrors(INITIAL_STATES.REGISTER.ERRORS_DATA);
+    } else {
+      setFormData(INITIAL_STATES.LOGIN.FORM_DATA);
+      setFormDataClicked(INITIAL_STATES.LOGIN.CLICKED_DATA);
+      setFormErrors(INITIAL_STATES.LOGIN.ERRORS_DATA);
+    }
   }, [isRegister]);
 
   useEffect(() => {
