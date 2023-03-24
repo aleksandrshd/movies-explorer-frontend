@@ -1,13 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
+
+import useCardsAmount from "../../hooks/useCardsAmmount";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+
 import {getAllDefaultMovies, shortFilter, wordFilter} from "../../utils/utils";
 
-export default function Movies({getDefaultMovies, deviceType}) {
+export default function Movies({getDefaultMovies}) {
 
   const currentUser = useContext(CurrentUserContext);
   const storageKey = currentUser._id;
@@ -16,106 +19,116 @@ export default function Movies({getDefaultMovies, deviceType}) {
   const [filterOn, setFilterOn] = useState(false);
   const [keyWord, setKeyWord] = useState('');
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
-  const [displayMoviesArray, setDisplayMoviesArray] = useState([]);
+  const [currentMoviesAmount, setCurrentMoviesAmount] = useState(0);
   const [addBtnVisible, setAddBtnVisible] = useState(true);
+  const [nothingFound, setNothingFound] = useState(false);
 
+  // Получение начального количества карточек для отрисовки и количества добавляемых кнопкой еще карточек
+  const {initCardsAmount, addCardsAmount} = useCardsAmount();
+
+  // Обработчик нажатия на кнопку ещё
   const onAddBtnClick = () => {
 
-    let i = displayMoviesArray.length;
-    let addAmmount = 0;
-    if (deviceType === 'desktop') {
-      addAmmount = 4;
-    } else if ((deviceType === 'tablet') || (deviceType === 'mobile')) {
-      addAmmount = 2;
-    }
+    if (foundMoviesArray.length < currentMoviesAmount + addCardsAmount) {
 
-    const newDisplayArray = displayMoviesArray.slice();
-    newDisplayArray.push(...foundMoviesArray.slice(i, i + addAmmount));
-
-    setDisplayMoviesArray(newDisplayArray);
-
-    if (displayMoviesArray.length = foundMoviesArray.length) {
+      setCurrentMoviesAmount(foundMoviesArray.length);
       setAddBtnVisible(false);
-    }
+
+    } else setCurrentMoviesAmount(currentMoviesAmount + addCardsAmount);
+
   };
 
-  // Восстановили конфигурацию из хранилища
+  // Восстановление конфигурации из хранилища
   useEffect(() => {
     if (localStorage.getItem(storageKey)) {
+
       const config = JSON.parse(localStorage.getItem(storageKey));
       setFilterOn(config.filterOn);
       setKeyWord(config.keyWord);
+
     }
   }, [storageKey]);
 
-  // Сохраняем конфигурацию при изменении фильтров
+  // Сохранение конфигурацию при изменении фильтров
   useEffect(() => {
+
     localStorage.setItem(storageKey, JSON.stringify({
       filterOn, keyWord,
-    }),);
-  }, [keyWord, filterOn]);
+    }));
 
-  // Один раз загрузили список в начале работы страницы и больше не трогаем его.
+  }, [keyWord, filterOn, storageKey]);
+
+  // Загрузка списка в начале работы страницы один раз и больше не трогаем его.
   useEffect(() => {
     const getAllMovies = async () => {
+
       const movies = await getAllDefaultMovies(getDefaultMovies, setLoading);
       setAllMovies(movies);
+
     }
+
     getAllMovies();
+
   }, [getDefaultMovies]);
 
-  // Здесь только фильтрация
+  // Фильтрация списка фильмов по ключевому слову или ключевому слову и продолжительности
   useEffect(() => {
-    let filteredMovies = keyWord ? allMovies.filter((movie) => wordFilter(keyWord, movie)) : allMovies;
 
-    if (filterOn) {
-      filteredMovies = filteredMovies.filter(movie => shortFilter(40, movie));
+    if (keyWord !== '') {
+
+      let filteredMovies = keyWord ? allMovies.filter((movie) => wordFilter(keyWord, movie)) : allMovies;
+
+      if (filterOn) {
+        filteredMovies = filteredMovies.filter(movie => shortFilter(40, movie));
+      }
+
+      setFoundMoviesArray(filteredMovies);
     }
 
-    setFoundMoviesArray(filteredMovies);
   }, [allMovies, keyWord, filterOn]);
 
+  // Установка текущего количества отображаемых карточек
   useEffect(() => {
 
-    if (deviceType === 'desktop') {
-      setDisplayMoviesArray(foundMoviesArray.slice(0, 12));
-    } else if (deviceType === 'tablet') {
-      setDisplayMoviesArray(foundMoviesArray.slice(0, 8));
-    } else if (deviceType === 'mobile') {
-      setDisplayMoviesArray(foundMoviesArray.slice(0, 5));
-    }
+    if (foundMoviesArray.length < initCardsAmount) {
+      setCurrentMoviesAmount(foundMoviesArray.length);
 
-  }, [foundMoviesArray, deviceType]);
+    } else setCurrentMoviesAmount(initCardsAmount);
 
+  }, [foundMoviesArray, initCardsAmount]);
+
+  // Установка видимости кнопки ещё
   useEffect(() => {
 
-    if (((deviceType === 'desktop') && (displayMoviesArray.length < 12)) ||
-      ((deviceType === 'tablet') && (displayMoviesArray.length < 8)) ||
-      ((deviceType === 'mobile') && (displayMoviesArray.length < 5))) {
+    if (foundMoviesArray.length <= currentMoviesAmount) {
+
       setAddBtnVisible(false);
-    }
 
-  }, []);
+    } else setAddBtnVisible(true);
 
+  }, [foundMoviesArray, currentMoviesAmount]);
+
+  // Установка наличия или отсутствия результатов поиска
   useEffect(() => {
 
-    if (((deviceType === 'desktop') && (displayMoviesArray.length < 12)) ||
-      ((deviceType === 'tablet') && (displayMoviesArray.length < 8)) ||
-      ((deviceType === 'mobile') && (displayMoviesArray.length < 5))) {
-      setAddBtnVisible(false);
-    }
+    if ((keyWord !== '') && (foundMoviesArray.length === 0)) {
 
-  }, [deviceType, displayMoviesArray]);
+      setNothingFound(true);
+
+    } else setNothingFound(false);
+
+  }, [foundMoviesArray]);
 
   return (<>
-      <SearchForm filterOn={filterOn}
-                  setFilterOn={setFilterOn}
-                  keyWord={keyWord}
-                  setKeyWord={setKeyWord}
-                  deviceType={deviceType}/>
-      {loading ? (<Preloader/>) : (<MoviesCardList moviesArray={displayMoviesArray}
-                                                   savedFilms={false}
-                                                   onAddBtnClick={onAddBtnClick}
-                                                   addBtnVisible={addBtnVisible}/>)}
-    </>);
+    <SearchForm filterOn={filterOn}
+                setFilterOn={setFilterOn}
+                keyWord={keyWord}
+                setKeyWord={setKeyWord}
+                nothingFound={nothingFound}/>
+    {loading ? (<Preloader/>) : (<MoviesCardList moviesArray={foundMoviesArray}
+                                                 savedFilms={false}
+                                                 onAddBtnClick={onAddBtnClick}
+                                                 addBtnVisible={addBtnVisible}
+                                                 currentMoviesAmount={currentMoviesAmount}/>)}
+  </>);
 }

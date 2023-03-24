@@ -73,6 +73,17 @@ export const INITIAL_STATES = {
       }
     }
   }
-}
+};
 
+export const RESOLUTION_TYPES = {
+  mobile: 480,
+  tablet: 800
+};
+
+
+export const DEVICE_TYPES = {
+  mobile: 'mobile',
+  tablet: 'tablet',
+  desktop: 'desktop'
+};
 

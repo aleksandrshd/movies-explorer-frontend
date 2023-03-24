@@ -17,7 +17,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as api from "../../utils/MainApi";
 import { getAllMovies } from '../../utils/MoviesApi';
 import { CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE } from "../../utils/constants";
-import { setDeviceTypeFn } from "../../utils/utils";
 
 function App() {
 
@@ -25,8 +24,6 @@ function App() {
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
   const [userData, setUserData] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
-
-  const [deviceType, setDeviceType] = useState('tablet');
 
   const location = useLocation();
   const viewHeader = (location.pathname === "/main") ||
@@ -63,7 +60,6 @@ function App() {
 
   const cbTokenCheck = useCallback(async () => {
     try {
-      /*setAppLoading(true);*/
       const jwt = localStorage.getItem('jwt');
       if (!jwt) {
         throw new Error('No token in storage');
@@ -79,7 +75,6 @@ function App() {
 
     } catch {
     } finally {
-      /*setAppLoading(false);*/
     }
   }, []);
 
@@ -114,24 +109,6 @@ function App() {
     cbTokenCheck();
   }, []);
 
-  useEffect(() => {
-    if (window.innerWidth < 480) {
-      setDeviceType('mobile');
-    } else if ((window.innerWidth >= 480) && (window.innerWidth < 800)) {
-      setDeviceType('tablet');
-    } else if (window.innerWidth >= 800) {
-      setDeviceType('desktop');
-    }
-  }, []);
-
-  useEffect(() => {
-    const sizeListener = setDeviceTypeFn(480, 800, setDeviceType);
-    window.addEventListener('resize', sizeListener);
-    return () => window.removeEventListener('resize', sizeListener);
-  }, [deviceType]);
-
-  console.log('Current deviceType is : ', deviceType);
-
   return (
 
     <CurrentUserContext.Provider value={userData}>
@@ -157,7 +134,6 @@ function App() {
             <ProtectedRoute path="/movies"
                             loggedIn={loggedIn}
                             getDefaultMovies={cbGetDefaultMovies}
-                            deviceType={deviceType}
                             component={Movies}/>
             <ProtectedRoute path="/saved-movies"
                             loggedIn={loggedIn}
