@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 
-import useCardsAmount from "../../hooks/useCardsAmmount";
+import useCardsDisplay from "../../hooks/useCardsAmmount";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -19,24 +19,10 @@ export default function Movies({getDefaultMovies}) {
   const [filterOn, setFilterOn] = useState(false);
   const [keyWord, setKeyWord] = useState('');
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
-  const [currentMoviesAmount, setCurrentMoviesAmount] = useState(0);
-  const [addBtnVisible, setAddBtnVisible] = useState(true);
   const [nothingFound, setNothingFound] = useState(false);
 
-  // Получение начального количества карточек для отрисовки и количества добавляемых кнопкой еще карточек
-  const {initCardsAmount, addCardsAmount} = useCardsAmount();
-
-  // Обработчик нажатия на кнопку ещё
-  const onAddBtnClick = () => {
-
-    if (foundMoviesArray.length < currentMoviesAmount + addCardsAmount) {
-
-      setCurrentMoviesAmount(foundMoviesArray.length);
-      setAddBtnVisible(false);
-
-    } else setCurrentMoviesAmount(currentMoviesAmount + addCardsAmount);
-
-  };
+  // Получение текущего массива отображаемых карточек, обработчика нажатия на кнопку еще и состояния видимости кнопки ещё
+  const { displayMovies, onAddBtnClick, addBtnVisible } = useCardsDisplay(foundMoviesArray);
 
   // Восстановление конфигурации из хранилища
   useEffect(() => {
@@ -58,7 +44,7 @@ export default function Movies({getDefaultMovies}) {
 
   }, [keyWord, filterOn, storageKey]);
 
-  // Загрузка списка в начале работы страницы один раз и больше не трогаем его.
+  // Загрузка списка всех фильмов в начале работы страницы один раз
   useEffect(() => {
     const getAllMovies = async () => {
 
@@ -87,27 +73,6 @@ export default function Movies({getDefaultMovies}) {
 
   }, [allMovies, keyWord, filterOn]);
 
-  // Установка текущего количества отображаемых карточек
-  useEffect(() => {
-
-    if (foundMoviesArray.length < initCardsAmount) {
-      setCurrentMoviesAmount(foundMoviesArray.length);
-
-    } else setCurrentMoviesAmount(initCardsAmount);
-
-  }, [foundMoviesArray, initCardsAmount]);
-
-  // Установка видимости кнопки ещё
-  useEffect(() => {
-
-    if (foundMoviesArray.length <= currentMoviesAmount) {
-
-      setAddBtnVisible(false);
-
-    } else setAddBtnVisible(true);
-
-  }, [foundMoviesArray, currentMoviesAmount]);
-
   // Установка наличия или отсутствия результатов поиска
   useEffect(() => {
 
@@ -125,10 +90,9 @@ export default function Movies({getDefaultMovies}) {
                 keyWord={keyWord}
                 setKeyWord={setKeyWord}
                 nothingFound={nothingFound}/>
-    {loading ? (<Preloader/>) : (<MoviesCardList moviesArray={foundMoviesArray}
+    {loading ? (<Preloader/>) : (<MoviesCardList displayMovies={displayMovies}
                                                  savedFilms={false}
                                                  onAddBtnClick={onAddBtnClick}
-                                                 addBtnVisible={addBtnVisible}
-                                                 currentMoviesAmount={currentMoviesAmount}/>)}
+                                                 addBtnVisible={addBtnVisible}/>)}
   </>);
 }
