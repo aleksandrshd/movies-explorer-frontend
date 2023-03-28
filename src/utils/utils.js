@@ -39,7 +39,6 @@ export const getAllDefaultMovies = async (getMovies, setLoading) => {
     if (setLoading) setLoading(true);
 
     const allMovies = await getMovies();
-    console.log(allMovies);
     localStorage.setItem(ALL_MOVIES_KEY, JSON.stringify(allMovies));
 
     if (setLoading) setLoading(false);
@@ -72,3 +71,35 @@ export const convertDuration = (duration) => {
     minutes
   };
 };
+
+export const convertMovieData = (movie) => {
+  return {
+    country: movie.country,
+    director: movie.director,
+    duration: movie.duration,
+    year: movie.year,
+    description: movie.description,
+    image: `https://api.nomoreparties.co/${movie.image.url}`,
+    trailerLink: movie.trailerLink,
+    thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
+    movieId: movie.id,
+    nameRU: movie.nameRU,
+    nameEN: movie.nameEN,
+  }
+}
+
+export const setIsLiked = (card, favouriteMovies) => {
+  const movie = favouriteMovies.find(mov => mov.movieId === card.id);
+
+  let isLiked;
+  let movieId;
+
+  if (movie) {
+    isLiked = true;
+    movieId = movie._id;
+  } else {
+    isLiked = false;
+  }
+
+  return { isLiked, movieId };
+}

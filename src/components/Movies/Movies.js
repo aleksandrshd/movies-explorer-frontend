@@ -11,7 +11,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { getAllDefaultMovies } from "../../utils/utils";
 import useFilteredMovies from "../../hooks/useFilteredMovies";
 
-export default function Movies({ getDefaultMovies }) {
+export default function Movies({ getDefaultMovies, onMovieLike, favouriteMovies }) {
 
   const currentUser = useContext(CurrentUserContext);
   const storageKey = currentUser._id;
@@ -51,6 +51,8 @@ export default function Movies({ getDefaultMovies }) {
     {loading ? (<Preloader/>) : (<MoviesCardList displayMovies={displayMovies}
                                                  savedFilms={false}
                                                  onAddBtnClick={onAddBtnClick}
-                                                 addBtnVisible={addBtnVisible}/>)}
+                                                 addBtnVisible={addBtnVisible}
+                                                 onMovieLike={onMovieLike}
+                                                 favouriteMovies={favouriteMovies}/>)}
   </>);
 }
