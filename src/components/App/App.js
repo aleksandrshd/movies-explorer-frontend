@@ -1,5 +1,5 @@
-import {useCallback, useEffect, useState} from "react";
-import {Redirect, Route, Switch, useLocation} from 'react-router-dom';
+import { useCallback, useEffect, useState } from "react";
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 
 import './App.css';
 
@@ -13,11 +13,10 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as api from "../../utils/MainApi";
-import {getAllMovies} from '../../utils/MoviesApi';
-import {CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE} from "../../utils/constants";
-import {convertMovieData, setIsLiked} from "../../utils/utils";
+import { getAllMovies } from '../../utils/MoviesApi';
+import { CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE } from "../../utils/constants";
 
 function App() {
 
@@ -25,8 +24,6 @@ function App() {
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
   const [userData, setUserData] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
-
-  const [favouriteMovies, setFavouriteMovies] = useState([]);
 
   const location = useLocation();
   const viewHeader = (location.pathname === "/main") ||
@@ -112,41 +109,6 @@ function App() {
     cbTokenCheck();
   }, []);
 
-  useEffect(() => {
-    const getFavouriteMovies = async () => {
-      const movies = await api.getFavouriteMovies();
-      setFavouriteMovies(movies);
-    }
-    getFavouriteMovies();
-  }, []);
-
-  console.log('favouriteMovies in App : ', favouriteMovies);
-
-  const cbHandleMovieClick = useCallback(async (card) => {
-
-    console.log('favouriteMovies in cbHandleMovieClick : ', favouriteMovies);
-    const {isLiked, movieId} = setIsLiked(card, favouriteMovies);
-    console.log('isLiked in cbHandleMovieClick : ', isLiked);
-    console.log('movieId in cbHandleMovieClick : ', movieId);
-
-    if (!isLiked) {
-      try {
-        return await api.addMovieToFavourites(convertMovieData(card));
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        return await api.removeMovieFromFavourites(movieId);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    /*setFavouriteMovies(await api.getFavouriteMovies());*/
-
-  }, []);
-
   return (
 
     <CurrentUserContext.Provider value={userData}>
@@ -172,8 +134,6 @@ function App() {
             <ProtectedRoute path="/movies"
                             loggedIn={loggedIn}
                             getDefaultMovies={cbGetDefaultMovies}
-                            onMovieLike={cbHandleMovieClick}
-                            favouriteMovies={favouriteMovies}
                             component={Movies}/>
             <ProtectedRoute path="/saved-movies"
                             loggedIn={loggedIn}

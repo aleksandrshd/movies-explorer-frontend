@@ -10,8 +10,9 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import { getAllDefaultMovies } from "../../utils/utils";
 import useFilteredMovies from "../../hooks/useFilteredMovies";
+import useFavouriteMovies from "../../hooks/useFavouriteMovies";
 
-export default function Movies({ getDefaultMovies, onMovieLike, favouriteMovies }) {
+export default function Movies({ getDefaultMovies }) {
 
   const currentUser = useContext(CurrentUserContext);
   const storageKey = currentUser._id;
@@ -42,6 +43,9 @@ export default function Movies({ getDefaultMovies, onMovieLike, favouriteMovies 
   // Получение текущего массива отображаемых карточек, обработчика нажатия на кнопку еще и состояния видимости кнопки ещё
   const { displayMovies, onAddBtnClick, addBtnVisible } = useCardsDisplay(foundMoviesArray);
 
+  // Получение текущего массива избранных фильмов и обработчика клика на кнопку лайк
+  const { favouriteMovies, cbHandleMovieClick } = useFavouriteMovies();
+
   return (<>
     <SearchForm filterOn={filterOn}
                 setFilterOn={setFilterOn}
@@ -52,7 +56,7 @@ export default function Movies({ getDefaultMovies, onMovieLike, favouriteMovies 
                                                  savedFilms={false}
                                                  onAddBtnClick={onAddBtnClick}
                                                  addBtnVisible={addBtnVisible}
-                                                 onMovieLike={onMovieLike}
+                                                 onMovieLike={cbHandleMovieClick}
                                                  favouriteMovies={favouriteMovies}/>)}
   </>);
 }

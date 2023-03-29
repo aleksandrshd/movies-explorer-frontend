@@ -83,7 +83,7 @@
     opacity: 0;
 }
 
-.movie__card:hover .movies__like-button_saved {
+.movie:hover .movie__like-button_saved {
     opacity: 1;
 }
 

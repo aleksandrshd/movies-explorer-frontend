@@ -8,13 +8,13 @@ export default function MoviesCard({card, savedFilms, onMovieLike, favouriteMovi
   const { isLiked } = setIsLiked(card, favouriteMovies);
 
   const handleMovieLike = () => {
-    onMovieLike(card);
+    onMovieLike(card, savedFilms);
   }
 
   return (
     <li className="movie">
       <img className="movie__image"
-           src={`https://api.nomoreparties.co/${card.image.url}`}
+           src={ savedFilms ? `${card.image}` : `https://api.nomoreparties.co/${card.image.url}` }
            alt="Постер к фильму"/>
       <div className="movie__container">
         <h2 className="movie__title">{card.nameRU}</h2>
