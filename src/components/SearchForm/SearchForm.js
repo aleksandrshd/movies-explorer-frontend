@@ -57,9 +57,9 @@ export default function SearchForm({ filterOn, setFilterOn, keyWord, setKeyWord,
           {!checkboxUnderInput && <FilterCheckbox value={filterOn} onChange={toggleFilter}/>}
         </div>
       </form>
-      {checkboxUnderInput && <FilterCheckbox value={filterOn} onChange={toggleFilter}/>}
       <span className="search__error">{searchEmpty && 'Введите ключевое слово'}</span>
       <span className="search__error">{nothingFound && 'Ничего не найдено'}</span>
+      {checkboxUnderInput && <FilterCheckbox value={filterOn} onChange={toggleFilter}/>}
     </div>
   );
 
