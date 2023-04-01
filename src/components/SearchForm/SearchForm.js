@@ -32,7 +32,8 @@ export default function SearchForm({ filterOn, setFilterOn, keyWord, setKeyWord,
 
   useEffect(() => {
 
-    if (keyWord) setValue(keyWord);
+    /*if (keyWord) setValue(keyWord);*/
+    setValue(keyWord);
 
   }, [keyWord, setValue]);
 
