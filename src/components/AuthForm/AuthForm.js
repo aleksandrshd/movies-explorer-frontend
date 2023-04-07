@@ -8,7 +8,7 @@ import { textsOfErrors, validators } from "../../utils/validators";
 import {INITIAL_STATES} from "../../utils/constants";
 
 
-export default function AuthForm({ loggedIn, isRegister, onSubmit }) {
+export default function AuthForm({ loggedIn, isRegister, errorMessage, onSubmit }) {
 
   const [formData, setFormData] = useState({});
   const [formDataClicked, setFormDataClicked] = useState({});
@@ -168,6 +168,7 @@ export default function AuthForm({ loggedIn, isRegister, onSubmit }) {
       <span className="register__error">{textNameError}</span>
       <span className="register__error">{textEmailError}</span>
       <span className="register__error">{textPasswordError}</span>
+      <span className="register__error">{errorMessage}</span>
       <button className={`register__button ${isInvalid ? 'register__button_disabled' : ''}`}
               disabled={isInvalid}>{isRegister ? 'Зарегистрироваться' : 'Войти'}</button>
       {isRegister && <p className="register__caption">Уже зарегистрированы? <Link className="register__link"

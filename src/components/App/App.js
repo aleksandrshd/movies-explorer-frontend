@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import {useCallback, useEffect, useState} from "react";
+import {Redirect, Route, Switch, useLocation} from 'react-router-dom';
 
 import './App.css';
 
@@ -13,10 +13,10 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import * as api from "../../utils/MainApi";
-import { getAllMovies } from '../../utils/MoviesApi';
-import { CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE } from "../../utils/constants";
+import {getAllMovies} from '../../utils/MoviesApi';
+import {CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE} from "../../utils/constants";
 
 function App() {
 
@@ -48,11 +48,13 @@ function App() {
       setLoggedIn(true);
       setUserData(user);
 
-    } catch {}
+    } catch {
+    }
   }, []);
 
-  const cbLogin = useCallback(async (email, password) => {
+  const cbLogin = useCallback(async (name, email, password) => {
     try {
+      setErrorMessage('');
       const data = await api.login(email, password);
       if (data.token) {
         setLoggedIn(true);
@@ -61,17 +63,20 @@ function App() {
       }
     } catch (error) {
       console.log(error);
+      setErrorMessage(error);
     }
   }, [cbTokenCheck]);
 
   const cbRegister = useCallback(async (name, email, password) => {
     try {
+      setErrorMessage('');
       const data = await api.register(name, email, password);
       if (data) {
-        await cbLogin(email, password);
+        await cbLogin(name, email, password);
       }
     } catch (error) {
       console.log(error);
+      setErrorMessage(error);
     }
   }, [cbLogin]);
 
@@ -104,7 +109,7 @@ function App() {
 
   useEffect(() => {
     cbTokenCheck();
-    }, [cbTokenCheck]);
+  }, [cbTokenCheck]);
 
   return (
 
@@ -120,11 +125,13 @@ function App() {
             <Route path="/sign-in">
               <AuthForm loggedIn={loggedIn}
                         isRegister={false}
+                        errorMessage={errorMessage}
                         onSubmit={cbLogin}/>
             </Route>
             <Route path="/sign-up">
               <AuthForm loggedIn={loggedIn}
                         isRegister={true}
+                        errorMessage={errorMessage}
                         onSubmit={cbRegister}/>
             </Route>
             <ProtectedRoute path="/movies"
