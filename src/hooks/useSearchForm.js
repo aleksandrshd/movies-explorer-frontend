@@ -11,12 +11,12 @@ const useSearchForm = (setKeyWord) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*if (value === '') {
-      setSearchEmpty(true);
-      return;
-    }*/
-    setSearchEmpty(false);
     setKeyWord(value);
+    if (value === '') {
+      setSearchEmpty(true);
+    } else {
+      setSearchEmpty(false);
+    }
   };
 
   return { value, setValue, searchEmpty, handleChange, handleSubmit };
