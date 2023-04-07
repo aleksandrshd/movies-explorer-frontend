@@ -21,7 +21,6 @@ import { CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE } from "../../
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
   const [userData, setUserData] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -33,30 +32,6 @@ function App() {
   const viewFooter = (location.pathname === "/main") ||
     (location.pathname === "/movies") ||
     (location.pathname === "/saved-movies");
-
-  const cbRegister = useCallback(async (name, email, password) => {
-    try {
-      const data = await api.register(name, email, password);
-      if (data) {
-        setRegistrationSuccessful(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  const cbLogin = useCallback(async (name, email, password) => {
-    try {
-      const data = await api.login(email, password);
-      if (data.token) {
-        setLoggedIn(true);
-        localStorage.setItem('jwt', data.token);
-        cbTokenCheck();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   const cbTokenCheck = useCallback(async () => {
     try {
@@ -73,10 +48,32 @@ function App() {
       setLoggedIn(true);
       setUserData(user);
 
-    } catch {
-    } finally {
-    }
+    } catch {}
   }, []);
+
+  const cbLogin = useCallback(async (email, password) => {
+    try {
+      const data = await api.login(email, password);
+      if (data.token) {
+        setLoggedIn(true);
+        localStorage.setItem('jwt', data.token);
+        await cbTokenCheck();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [cbTokenCheck]);
+
+  const cbRegister = useCallback(async (name, email, password) => {
+    try {
+      const data = await api.register(name, email, password);
+      if (data) {
+        await cbLogin(email, password);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [cbLogin]);
 
   const cbChangeUserData = useCallback(async (name, email) => {
     try {
@@ -107,7 +104,7 @@ function App() {
 
   useEffect(() => {
     cbTokenCheck();
-  }, []);
+    }, [cbTokenCheck]);
 
   return (
 
@@ -128,7 +125,6 @@ function App() {
             <Route path="/sign-up">
               <AuthForm loggedIn={loggedIn}
                         isRegister={true}
-                        registrationSuccessful={registrationSuccessful}
                         onSubmit={cbRegister}/>
             </Route>
             <ProtectedRoute path="/movies"

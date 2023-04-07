@@ -1,14 +1,14 @@
-import {useCallback, useEffect, useState} from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import {Link, Redirect} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import './AuthForm.css'
 
-import {textsOfErrors, validators} from "../../utils/validators";
+import { textsOfErrors, validators } from "../../utils/validators";
 import {INITIAL_STATES} from "../../utils/constants";
 
 
-export default function AuthForm({loggedIn, isRegister, registrationSuccessful, onSubmit}) {
+export default function AuthForm({ loggedIn, isRegister, onSubmit }) {
 
   const [formData, setFormData] = useState({});
   const [formDataClicked, setFormDataClicked] = useState({});
@@ -30,7 +30,7 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
       setFormDataClicked(INITIAL_STATES.LOGIN.CLICKED_DATA);
       setFormErrors(INITIAL_STATES.LOGIN.ERRORS_DATA);
     }
-  }, []);
+  }, [isRegister]);
 
   useEffect(() => {
     if (isRegister) {
@@ -104,7 +104,7 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
         setTextPasswordError(textsOfErrors.password.minLengthTextError);
       } else setTextPasswordError('');
     }
-  }, [formErrors, formDataClicked]);
+  }, [formErrors, formDataClicked, isRegister]);
 
   const cbChange = useCallback((event) => {
     const {name, value} = event.target;
@@ -119,7 +119,7 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
     setFormDataClicked({
       ...formDataClicked, [name]: true
     });
-  }, [formDataClicked, formData]);
+  }, [formDataClicked]);
 
   const cbSubmit = useCallback((event) => {
     event.preventDefault();
@@ -127,7 +127,7 @@ export default function AuthForm({loggedIn, isRegister, registrationSuccessful, 
     onSubmit(name, email, password);
   }, [onSubmit, formData]);
 
-  if (loggedIn || registrationSuccessful) {
+  if (loggedIn) {
     return <Redirect to="/movies"/>;
   }
 
