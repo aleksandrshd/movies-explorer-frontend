@@ -1,5 +1,5 @@
-import {useCallback, useEffect, useState} from "react";
-import {Redirect, Route, Switch, useLocation} from 'react-router-dom';
+import { useCallback, useEffect, useState } from "react";
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 
 import './App.css';
 
@@ -13,10 +13,10 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as api from "../../utils/MainApi";
-import {getAllMovies} from '../../utils/MoviesApi';
-import {CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE} from "../../utils/constants";
+import { getAllMovies } from '../../utils/MoviesApi';
+import { CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE } from "../../utils/constants";
 
 function App() {
 
