@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'http://api.movies.aleksandrs.nomoredomains.rocks';
 
 export const register = async (name, email, password) => {
   const res = await fetch(`${BASE_URL}/signup`, {
