@@ -15,7 +15,11 @@ import useFavouriteMovies from "../../hooks/useFavouriteMovies";
 export default function Movies({ getDefaultMovies }) {
 
   const currentUser = useContext(CurrentUserContext);
-  const storageKey = currentUser._id;
+
+  let storageKey;
+  if (currentUser._id !== undefined) {
+    storageKey = currentUser._id;
+  }
 
   const [allMovies, setAllMovies] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,9 +28,14 @@ export default function Movies({ getDefaultMovies }) {
   useEffect(() => {
     const getAllMovies = async () => {
       const movies = await getAllDefaultMovies(getDefaultMovies, setLoading);
-      setAllMovies(movies);
+
+      if (movies) {
+        setAllMovies(movies);
+      }
+
     }
     getAllMovies();
+
   }, [getDefaultMovies]);
 
   // Получение массива отфильтрованных карточек, значений и установщиков значений фильтров по ключевому слову и

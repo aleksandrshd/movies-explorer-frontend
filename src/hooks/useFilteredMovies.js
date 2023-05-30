@@ -31,7 +31,6 @@ const useFilteredMovies = (allMovies, storageKey) => {
   // Фильтрация списка фильмов по ключевому слову или ключевому слову и продолжительности
   useEffect(() => {
 
-    /*if (keyWord !== '') {*/
 
       let filteredMovies = keyWord ? allMovies.filter((movie) => wordFilter(keyWord, movie)) : allMovies;
 
@@ -40,14 +39,13 @@ const useFilteredMovies = (allMovies, storageKey) => {
       }
 
       setFoundMoviesArray(filteredMovies);
-    /*}*/
 
   }, [allMovies, keyWord, filterOn]);
 
   // Установка наличия или отсутствия результатов поиска
   useEffect(() => {
 
-    if (/*(keyWord !== '') && */(foundMoviesArray.length === 0)) {
+    if (foundMoviesArray.length === 0) {
 
       setNothingFound(true);
 

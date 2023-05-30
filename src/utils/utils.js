@@ -39,6 +39,7 @@ export const getAllDefaultMovies = async (getMovies, setLoading) => {
     if (setLoading) setLoading(true);
 
     const allMovies = await getMovies();
+
     localStorage.setItem(ALL_MOVIES_KEY, JSON.stringify(allMovies));
 
     if (setLoading) setLoading(false);
