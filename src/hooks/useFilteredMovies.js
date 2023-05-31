@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { shortFilter, wordFilter } from "../utils/utils";
+import {useEffect, useState} from "react";
+import {shortFilter, wordFilter} from "../utils/utils";
 
 const useFilteredMovies = (allMovies, storageKey) => {
 
@@ -22,23 +22,25 @@ const useFilteredMovies = (allMovies, storageKey) => {
   // Сохранение конфигурацию при изменении фильтров
   useEffect(() => {
 
-    localStorage.setItem(storageKey, JSON.stringify({
-      filterOn, keyWord,
-    }));
+    if (storageKey) {
 
+      localStorage.setItem(storageKey, JSON.stringify({
+        filterOn, keyWord,
+      }));
+    }
+    
   }, [keyWord, filterOn, storageKey]);
 
   // Фильтрация списка фильмов по ключевому слову или ключевому слову и продолжительности
   useEffect(() => {
 
+    let filteredMovies = keyWord ? allMovies.filter((movie) => wordFilter(keyWord, movie)) : allMovies;
 
-      let filteredMovies = keyWord ? allMovies.filter((movie) => wordFilter(keyWord, movie)) : allMovies;
+    if (filterOn) {
+      filteredMovies = filteredMovies.filter(movie => shortFilter(40, movie));
+    }
 
-      if (filterOn) {
-        filteredMovies = filteredMovies.filter(movie => shortFilter(40, movie));
-      }
-
-      setFoundMoviesArray(filteredMovies);
+    setFoundMoviesArray(filteredMovies);
 
   }, [allMovies, keyWord, filterOn]);
 
@@ -53,7 +55,7 @@ const useFilteredMovies = (allMovies, storageKey) => {
 
   }, [foundMoviesArray]);
 
-  return { filterOn, setFilterOn, keyWord, setKeyWord, foundMoviesArray, nothingFound};
+  return {filterOn, setFilterOn, keyWord, setKeyWord, foundMoviesArray, nothingFound};
 }
 
 export default useFilteredMovies;

@@ -16,10 +16,7 @@ export default function Movies({ getDefaultMovies }) {
 
   const currentUser = useContext(CurrentUserContext);
 
-  let storageKey;
-  if (currentUser._id !== undefined) {
-    storageKey = currentUser._id;
-  }
+  const storageKey = currentUser._id;
 
   const [allMovies, setAllMovies] = useState([]);
   const [loading, setLoading] = useState(false);
