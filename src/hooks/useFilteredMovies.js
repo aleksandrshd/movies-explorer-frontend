@@ -6,7 +6,6 @@ const useFilteredMovies = (allMovies, storageKey) => {
   const [filterOn, setFilterOn] = useState(false);
   const [keyWord, setKeyWord] = useState('');
   const [foundMoviesArray, setFoundMoviesArray] = useState([]);
-  const [nothingFound, setNothingFound] = useState(false);
 
   // Восстановление конфигурации из хранилища
   useEffect(() => {
@@ -44,18 +43,7 @@ const useFilteredMovies = (allMovies, storageKey) => {
 
   }, [allMovies, keyWord, filterOn]);
 
-  // Установка наличия или отсутствия результатов поиска
-  useEffect(() => {
-
-    if (foundMoviesArray.length === 0) {
-
-      setNothingFound(true);
-
-    } else setNothingFound(false);
-
-  }, [foundMoviesArray]);
-
-  return {filterOn, setFilterOn, keyWord, setKeyWord, foundMoviesArray, nothingFound};
+  return {filterOn, setFilterOn, keyWord, setKeyWord, foundMoviesArray, nothingFound: foundMoviesArray.length === 0};
 }
 
 export default useFilteredMovies;

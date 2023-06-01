@@ -6,8 +6,8 @@ export default function MoviesCard({ card, savedFilms, onMovieLike, favouriteMov
 
   const { isLiked } = setIsLiked(card, favouriteMovies);
 
-  const handleMovieLike = () => {
-    onMovieLike(card, savedFilms);
+  const handleMovieLike = (event) => {
+    onMovieLike(event, card, savedFilms);
   }
 
   return (

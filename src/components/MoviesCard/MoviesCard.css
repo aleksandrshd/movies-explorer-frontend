@@ -42,7 +42,6 @@
     white-space: pre-wrap;
     height: 32px;
     overflow: hidden;
-    /*text-overflow: ellipsis;*/
 }
 
 @media screen and (max-width: 768px) {

@@ -16,8 +16,10 @@ const useFavouriteMovies = () => {
     getFavouriteMovies();
   }, []);
 
-  const cbHandleMovieClick = useCallback(async (card, savedFilms) => {
+  const cbHandleMovieClick = useCallback(async (event, card, savedFilms) => {
 
+    event.stopPropagation();
+    
     const { isLiked, movieId } = setIsLiked(card, favouriteMovies);
 
     if (!isLiked && !savedFilms) {
