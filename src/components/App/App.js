@@ -119,40 +119,49 @@ function App() {
         {viewHeader && <Header loggedIn={loggedIn}/>}
         <main>
           <Switch>
-            <ProtectedRoute path="/main"
-                            loggedIn={loggedIn}
-                            component={Main}/>
+
             <Route path="/sign-in">
               <AuthForm loggedIn={loggedIn}
                         isRegister={false}
                         errorMessage={errorMessage}
                         onSubmit={cbLogin}/>
             </Route>
+
             <Route path="/sign-up">
               <AuthForm loggedIn={loggedIn}
                         isRegister={true}
                         errorMessage={errorMessage}
                         onSubmit={cbRegister}/>
             </Route>
+
+            <Route path="/main">
+              <Main />
+            </Route>
+
             <ProtectedRoute path="/movies"
                             loggedIn={loggedIn}
                             getDefaultMovies={cbGetDefaultMovies}
                             component={Movies}/>
+
             <ProtectedRoute path="/saved-movies"
                             loggedIn={loggedIn}
                             component={SavedMovies}/>
+
             <ProtectedRoute path="/profile"
                             loggedIn={loggedIn}
                             component={Profile}
                             errorMessage={errorMessage}
                             onSubmit={cbChangeUserData}
                             onLogout={cbLogout}/>
+
             <Route exact path="/">
-              {loggedIn ? <Redirect to="/main"/> : <Redirect to="/sign-in"/>}
+              {loggedIn ? <Redirect to="/movies"/> : <Redirect to="/main"/>}
             </Route>
+
             <Route path="*">
               <PageNotFound/>
             </Route>
+
           </Switch>
         </main>
         {viewFooter && <Footer/>}
