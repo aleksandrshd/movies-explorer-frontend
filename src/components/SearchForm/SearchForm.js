@@ -1,32 +1,12 @@
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect} from "react";
 
 import './SearchForm.css';
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import useSearchForm from "../../hooks/useSearchForm";
-import {debounce} from "../../utils/utils";
+import useResize from "../../hooks/useResize";
 
 export default function SearchForm({filterOn, setFilterOn, keyWord, setKeyWord, nothingFound}) {
-
-    const [checkboxUnderInput, setCheckboxUnderInput] = useState(false);
-
-    // Установка значения положения чекбокса короткометражек в зависимости от ширины окна просмотра при первоначальной отрисовке страницы
-    useEffect(() => {
-
-        window.innerWidth < 640 ? setCheckboxUnderInput(true) : setCheckboxUnderInput(false);
-
-    }, [])
-
-    // Установка значения положения чекбокса короткометражек в зависимости от ширины окна просмотра при изменении ширины окна просмотра
-    useEffect(() => {
-
-        const sizeListener = debounce(640, setCheckboxUnderInput, false, true);
-
-        window.addEventListener('resize', sizeListener);
-
-        return () => window.removeEventListener('resize', sizeListener);
-
-    }, [checkboxUnderInput]);
 
     const {value, setValue, searchEmpty, handleChange, handleSubmit} = useSearchForm(setKeyWord);
 
@@ -38,6 +18,8 @@ export default function SearchForm({filterOn, setFilterOn, keyWord, setKeyWord, 
     }, [keyWord, setValue]);
 
     const toggleFilter = useCallback((e) => setFilterOn(e.target.checked), [setFilterOn]);
+
+    const { checkboxUnderInput } = useResize();
 
     return (
         <div className="search">
