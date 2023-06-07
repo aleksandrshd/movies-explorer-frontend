@@ -40,16 +40,16 @@ export const INITIAL_STATES = {
     },
     ERRORS_DATA: {
       name: {
-        empty: true,
-        minLength: true,
-        maxLength: true
+        empty: false,
+        minLength: false,
+        maxLength: false
       },
       email: {
-        isEmail: true
+        isEmail: false
       },
       password: {
-        empty: true,
-        minLength: true
+        empty: false,
+        minLength: false
       }
     }
   },
@@ -65,11 +65,11 @@ export const INITIAL_STATES = {
     },
     ERRORS_DATA: {
       email: {
-        isEmail: true
+        isEmail: false
       },
       password: {
-        empty: true,
-        minLength: true
+        empty: false,
+        minLength: false
       }
     }
   }

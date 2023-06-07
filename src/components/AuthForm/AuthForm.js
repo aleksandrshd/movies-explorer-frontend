@@ -33,18 +33,6 @@ export default function AuthForm({ loggedIn, isRegister, errorMessage, onSubmit 
   }, [isRegister]);
 
   useEffect(() => {
-    if (isRegister) {
-      setFormData(INITIAL_STATES.REGISTER.FORM_DATA);
-      setFormDataClicked(INITIAL_STATES.REGISTER.CLICKED_DATA);
-      setFormErrors(INITIAL_STATES.REGISTER.ERRORS_DATA);
-    } else {
-      setFormData(INITIAL_STATES.LOGIN.FORM_DATA);
-      setFormDataClicked(INITIAL_STATES.LOGIN.CLICKED_DATA);
-      setFormErrors(INITIAL_STATES.LOGIN.ERRORS_DATA);
-    }
-  }, [isRegister]);
-
-  useEffect(() => {
     const formKeys = Object.keys(formData);
 
     const allErrors = formKeys.map(key => {
@@ -79,6 +67,10 @@ export default function AuthForm({ loggedIn, isRegister, errorMessage, onSubmit 
 
   useEffect(() => {
 
+    setTextNameError('');
+    setTextEmailError('');
+    setTextPasswordError('');
+
     if (isRegister) {
       if (formDataClicked.name) {
         if (formErrors.name.empty) {
@@ -87,14 +79,14 @@ export default function AuthForm({ loggedIn, isRegister, errorMessage, onSubmit 
           setTextNameError(textsOfErrors.name.minLengthNameTextError);
         } else if (formErrors.name.maxLength) {
           setTextNameError(textsOfErrors.name.maxLengthNameTextError);
-        } else setTextNameError('');
+        }
       }
     }
 
     if (formDataClicked.email) {
       if (formErrors.email.isEmail) {
         setTextEmailError(textsOfErrors.email.isEmailTextError);
-      } else setTextEmailError('');
+      }
     }
 
     if (formDataClicked.password) {
@@ -102,7 +94,7 @@ export default function AuthForm({ loggedIn, isRegister, errorMessage, onSubmit 
         setTextPasswordError(textsOfErrors.password.emptyTextError);
       } else if (formErrors.password.minLength) {
         setTextPasswordError(textsOfErrors.password.minLengthTextError);
-      } else setTextPasswordError('');
+      }
     }
   }, [formErrors, formDataClicked, isRegister]);
 
