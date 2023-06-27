@@ -25,6 +25,7 @@ Movies - cервис, в котором можно найти фильмы по 
 
 ## Ссылки
 
+- [Пул реквест](https://github.com/aleksandrshd/movies-explorer-frontend/pull/3)
 - [Макет](https://disk.yandex.ru/d/96wOhHPTi11Fig)
-
-- [GitHub Pages](https://aleksandrshd.github.io/movies-explorer-frontend)
+- [Frontend](https://movies.aleksandrs.nomoredomains.monster)
+- [Backend](https://api.movies.aleksandrs.nomoredomains.rocks)
