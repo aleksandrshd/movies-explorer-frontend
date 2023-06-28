@@ -49,12 +49,9 @@ export const getAllDefaultMovies = async (getMovies, setLoading) => {
 };
 
 export const wordFilter = (word, movie) => {
-  const {country, director, description, nameRU, nameEN} = movie;
+  const { nameRU, nameEN } = movie;
   const search = new RegExp(word, 'i');
   return (
-    search.test(country) ||
-    search.test(director) ||
-    search.test(description) ||
     search.test(nameRU) ||
     search.test(nameEN)
   );
