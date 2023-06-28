@@ -91,6 +91,12 @@
     opacity: 1;
 }
 
+@media screen and (max-width: 544px) {
+    .movie__like-button_saved {
+        opacity: 1;
+    }
+}
+
 .movie__duration {
     font-weight: 400;
     font-size: 11px;
