@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import useCardsDisplay from "../../hooks/useCardsAmmount";
+import useCardsDisplay from "../../hooks/useCardsDisplay";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";

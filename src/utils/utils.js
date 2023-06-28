@@ -22,9 +22,9 @@ export const setDeviceTypeFn = (mobileRes, tabletRes, setter) => {
     if (isCooldown) return;
     if (e.target.innerWidth < mobileRes) {
       setter('mobile');
-    } else if ((e.target.innerWidth >= mobileRes) && (e.target.innerWidth < tabletRes)) {
+    } else if ((e.target.innerWidth >= mobileRes) && (e.target.innerWidth <= tabletRes)) {
       setter('tablet');
-    } else if (e.target.innerWidth >= tabletRes) {
+    } else if (e.target.innerWidth > tabletRes) {
       setter('desktop');
     }
     isCooldown = true;

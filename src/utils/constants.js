@@ -55,8 +55,8 @@ export const INITIAL_STATES = {
 };
 
 export const RESOLUTION_TYPES = {
-  mobile: 480,
-  tablet: 800
+  mobile: 631,
+  tablet: 900
 };
 
 

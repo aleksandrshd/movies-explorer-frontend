@@ -18,7 +18,7 @@ const useCardsDisplay = (foundMoviesArray) => {
 
       setDeviceType(DEVICE_TYPES.mobile);
 
-    } else if ((window.innerWidth >= RESOLUTION_TYPES.mobile) && (window.innerWidth < RESOLUTION_TYPES.tablet)) {
+    } else if ((window.innerWidth >= RESOLUTION_TYPES.mobile) && (window.innerWidth <= RESOLUTION_TYPES.tablet)) {
 
       setDeviceType(DEVICE_TYPES.tablet);
 
