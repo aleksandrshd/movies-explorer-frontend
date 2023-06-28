@@ -13,23 +13,26 @@
     }
 }
 
-.register__logo {
-    width: 38px;
-    height: 38px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url(../../images/logo.svg);
+.register__link {
     margin-top: 70px;
     margin-bottom: 40px;
     align-self: start;
 }
 
 @media screen and (max-width: 450px) {
-    .register__logo {
+    .register__link {
         align-self: center;
         margin-top: 56px;
         margin-bottom: 50px;
     }
+}
+
+.register__logo {
+    width: 38px;
+    height: 38px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(../../images/logo.svg);
 }
 
 .register__header {
