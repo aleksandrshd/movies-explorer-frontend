@@ -1,5 +1,5 @@
 import './Profile.css'
-import {useCallback, useContext, useEffect, useState} from "react";
+import {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import {textsOfErrors, validators} from "../../utils/validators";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
@@ -36,6 +36,10 @@ export default function Profile({errorMessage, onSubmit, onLogout}) {
   const [isInvalid, setIsInvalid] = useState(true);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const isUserDataSimilar = useMemo(() => { return currentUser.name === formData.name && currentUser.email === formData.email }, [currentUser, formData]);
+
+  const isSubmitDisabled = useMemo(() => { return isInvalid || isUserDataSimilar }, [isInvalid, isUserDataSimilar]);
 
   useEffect(() => {
     const formKeys = Object.keys(formData);
@@ -94,15 +98,13 @@ export default function Profile({errorMessage, onSubmit, onLogout}) {
     setFormDataClicked({
       ...formDataClicked, [name]: true
     });
-  }, [formDataClicked, formData]);
+  }, [formDataClicked]);
 
   const cbSubmit = useCallback((event) => {
     event.preventDefault();
     const {name, email} = formData;
-    if ((name !== currentUser.name) || (email !== currentUser.email)) {
     onSubmit(name, email);
     setIsSubmitted(true);
-    }
   }, [onSubmit, formData]);
 
   return (
@@ -140,8 +142,8 @@ export default function Profile({errorMessage, onSubmit, onLogout}) {
         <span
           className={`profile__text ${errorMessage ? 'profile__text_red' : ''}`}>{isSubmitted && (errorMessage || 'Данные профиля обновлены')}
       </span>
-      <button className={`profile__button ${isInvalid ? 'profile__button_disabled' : ''}`}
-              disabled={isInvalid}>Редактировать
+      <button className={`profile__button ${isSubmitDisabled ? 'profile__button_disabled' : ''}`}
+              disabled={isSubmitDisabled}>Редактировать
       </button>
       <button className="profile__button profile__button-exit"
               onClick={onLogout}>Выйти из аккаунта
