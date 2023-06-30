@@ -153,6 +153,10 @@
     }
 }
 
+.header__link_active {
+    font-weight: 600;
+}
+
 .header__link_last {
     margin-left: 40px;
 }
