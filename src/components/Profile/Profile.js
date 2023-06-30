@@ -37,9 +37,11 @@ export default function Profile({errorMessage, onSubmit, onLogout}) {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const [isReqInProgress, setIsReqInProgress] = useState(false);
+
   const isUserDataSimilar = useMemo(() => { return currentUser.name === formData.name && currentUser.email === formData.email }, [currentUser, formData]);
 
-  const isSubmitDisabled = useMemo(() => { return isInvalid || isUserDataSimilar }, [isInvalid, isUserDataSimilar]);
+  const isSubmitDisabled = useMemo(() => { return isInvalid || isUserDataSimilar || isReqInProgress }, [isInvalid, isUserDataSimilar, isReqInProgress]);
 
   useEffect(() => {
     const formKeys = Object.keys(formData);
@@ -101,10 +103,12 @@ export default function Profile({errorMessage, onSubmit, onLogout}) {
   }, [formDataClicked]);
 
   const cbSubmit = useCallback((event) => {
+    setIsReqInProgress(true);
     event.preventDefault();
     const {name, email} = formData;
     onSubmit(name, email);
     setIsSubmitted(true);
+    setIsReqInProgress(false);
   }, [onSubmit, formData]);
 
   return (
