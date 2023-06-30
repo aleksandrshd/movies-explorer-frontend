@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {shortFilter, wordFilter} from "../utils/utils";
+import {SHORT_FILM_DURATION} from "../utils/constants";
 
 const useFilteredMovies = (allMovies, storageKey) => {
 
@@ -36,7 +37,7 @@ const useFilteredMovies = (allMovies, storageKey) => {
     let filteredMovies = keyWord ? allMovies.filter((movie) => wordFilter(keyWord, movie)) : allMovies;
 
     if (filterOn) {
-      filteredMovies = filteredMovies.filter(movie => shortFilter(40, movie));
+      filteredMovies = filteredMovies.filter(movie => shortFilter(SHORT_FILM_DURATION, movie));
     }
 
     setFoundMoviesArray(filteredMovies);

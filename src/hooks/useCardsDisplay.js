@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { setDeviceTypeFn } from "../utils/utils";
-import { DEVICE_TYPES, RESOLUTION_TYPES } from "../utils/constants";
+import {DEVICE_TYPES, INIT_ADD_CARDS, RESOLUTION_TYPES} from "../utils/constants";
 
 const useCardsDisplay = (foundMoviesArray) => {
 
@@ -46,18 +46,18 @@ const useCardsDisplay = (foundMoviesArray) => {
 
     if (deviceType === DEVICE_TYPES.desktop) {
 
-      setInitCardsAmount(12);
-      setAddCardsAmount(4);
+      setInitCardsAmount(INIT_ADD_CARDS.desktop.init);
+      setAddCardsAmount(INIT_ADD_CARDS.desktop.add);
 
     } else if (deviceType === DEVICE_TYPES.tablet) {
 
-      setInitCardsAmount(8);
-      setAddCardsAmount(2);
+      setInitCardsAmount(INIT_ADD_CARDS.tablet.init);
+      setAddCardsAmount(INIT_ADD_CARDS.tablet.add);
 
     } else if (deviceType === DEVICE_TYPES.mobile) {
 
-      setInitCardsAmount(5);
-      setAddCardsAmount(2);
+      setInitCardsAmount(INIT_ADD_CARDS.mobile.init);
+      setAddCardsAmount(INIT_ADD_CARDS.mobile.add);
 
     }
 

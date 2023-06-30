@@ -66,5 +66,22 @@ export const DEVICE_TYPES = {
   desktop: 'desktop'
 };
 
+export const INIT_ADD_CARDS = {
+  mobile: {
+    init: 5,
+    add: 2
+  },
+  tablet: {
+    init: 8,
+    add: 2
+  },
+  desktop: {
+    init: 12,
+    add: 4
+  }
+};
+
 export const SEARCHFORM_CHECKBOX_WIDTH = 640;
+
+export const SHORT_FILM_DURATION = 40;
 
