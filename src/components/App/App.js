@@ -17,10 +17,12 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as api from "../../utils/MainApi";
 import { getAllMovies } from '../../utils/MoviesApi';
 import { CHANGE_USERDATA_ERROR_MESSAGE, LOAD_MOVIES_ERROR_MESSAGE } from "../../utils/constants";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [tokenLoading, setTokenLoading] = useState(true);
   const [userData, setUserData] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -49,6 +51,8 @@ function App() {
       setUserData(user);
 
     } catch {
+    } finally {
+      setTokenLoading(false);
     }
   }, []);
 
@@ -111,6 +115,10 @@ function App() {
     cbTokenCheck();
   }, [cbTokenCheck]);
 
+  if (tokenLoading) {
+    return <Preloader />;
+  }
+
   return (
 
     <CurrentUserContext.Provider value={userData}>
@@ -118,6 +126,7 @@ function App() {
       <div className="App">
         {viewHeader && <Header loggedIn={loggedIn}/>}
         <main>
+
           <Switch>
 
             <Route path="/sign-in">
