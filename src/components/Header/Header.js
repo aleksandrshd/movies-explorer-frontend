@@ -20,7 +20,7 @@ export default function Header({loggedIn}) {
         className={`header__overlay ${isMenuOpen && 'header__overlay_opened'}`}
         onClick={closeMenu}
       />
-      <Link className="header__link" to="/">
+      <Link className="header__link" to="/main">
         <div className="header__logo"></div>
       </Link>
       {loggedIn && <nav
