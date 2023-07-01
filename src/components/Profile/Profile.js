@@ -102,11 +102,11 @@ export default function Profile({errorMessage, onSubmit, onLogout}) {
     });
   }, [formDataClicked]);
 
-  const cbSubmit = useCallback((event) => {
+  const cbSubmit = useCallback(async (event) => {
     setIsReqInProgress(true);
     event.preventDefault();
     const {name, email} = formData;
-    onSubmit(name, email);
+    await onSubmit(name, email);
     setIsSubmitted(true);
     setIsReqInProgress(false);
   }, [onSubmit, formData]);
@@ -125,7 +125,8 @@ export default function Profile({errorMessage, onSubmit, onLogout}) {
             id="name"
             value={formData.name}
             onChange={cbChange}
-            onBlur={cbBlur}/>
+            onBlur={cbBlur}
+            disabled={isReqInProgress}/>
         </div>
         <div className="profile__border"></div>
         <div className="profile__field">
@@ -137,7 +138,8 @@ export default function Profile({errorMessage, onSubmit, onLogout}) {
             id="email"
             value={formData.email}
             onChange={cbChange}
-            onBlur={cbBlur}/>
+            onBlur={cbBlur}
+            disabled={isReqInProgress}/>
         </div>
       </div>
       <div className="profile__container">
