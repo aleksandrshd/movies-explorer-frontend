@@ -26,7 +26,9 @@ const useFavouriteMovies = () => {
     if (!isLiked && !savedFilms) {
       try {
         await api.addMovieToFavourites(convertMovieData(card));
-        return setFavouriteMovies(await api.getFavouriteMovies());
+        const newFavouriteMovies = favouriteMovies.slice();
+        newFavouriteMovies.push(convertMovieData(card));
+        return setFavouriteMovies(newFavouriteMovies);
       } catch (error) {
         console.log(error);
       }
@@ -39,7 +41,9 @@ const useFavouriteMovies = () => {
           movieIdDel = movieId;
         }
         await api.removeMovieFromFavourites(movieIdDel);
-        return setFavouriteMovies(await api.getFavouriteMovies());
+        const indexOfElement = favouriteMovies.indexOf(card);
+        const newFavouriteMovies = favouriteMovies.splice(indexOfElement, 1);
+        return setFavouriteMovies(newFavouriteMovies);
       } catch (error) {
         console.log(error);
       }
