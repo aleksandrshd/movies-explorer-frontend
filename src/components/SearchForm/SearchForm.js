@@ -1,43 +1,53 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect} from "react";
 
 import './SearchForm.css';
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import {debounce} from "../../utils/utils";
+import useSearchForm from "../../hooks/useSearchForm";
+import useResize from "../../hooks/useResize";
 
-export default function SearchForm() {
+export default function SearchForm({filterOn, setFilterOn, keyWord, setKeyWord, nothingFound}) {
 
-  const [mobile, setMobile] = useState(false);
+    const {value, setValue, searchEmpty, handleChange, handleSubmit} = useSearchForm(setKeyWord);
 
-  useEffect(() => {
-    window.innerWidth < 640 ? setMobile(true) : setMobile(false);
-  }, [])
+    useEffect(() => {
 
-  useEffect(() => {
-    const sizeListener = debounce(640, setMobile, false, true);
-    window.addEventListener('resize', sizeListener);
-    return () => window.removeEventListener('resize', sizeListener);
-  }, [mobile]);
+        /*if (keyWord) setValue(keyWord);*/
+        setValue(keyWord);
 
-  return (
-    <div className="search">
-      <form className="search__form">
-        <div className="search__container search__container_input">
-          <div className="search__logo"/>
-          <input
-            className="search__input"
-            name="film"
-            placeholder="Фильм"
-            required/>
+    }, [keyWord, setValue]);
+
+    const toggleFilter = useCallback((e) => setFilterOn(e.target.checked), [setFilterOn]);
+
+    const { checkboxUnderInput } = useResize();
+
+    return (
+        <div className="search">
+            <form className="search__form" onSubmit={handleSubmit}>
+                <div className="search__container search__container_input">
+                    <div className="search__logo"/>
+                    <input
+                        className="search__input"
+                        name="film"
+                        type="text"
+                        value={value}
+                        onChange={handleChange}
+                        placeholder="Фильм"/>
+                </div>
+                <div className="search__container">
+                    <button className="search__button">Найти</button>
+                    <div className="search__border"/>
+                    {!checkboxUnderInput && <FilterCheckbox value={filterOn} onChange={toggleFilter}/>}
+                </div>
+            </form>
+            {!checkboxUnderInput && <span className="search__error">{searchEmpty && 'Введите ключевое слово'}</span>}
+            {!checkboxUnderInput && <span className="search__error">{nothingFound && 'Ничего не найдено'}</span>}
+            {checkboxUnderInput && <>
+                <FilterCheckbox value={filterOn} onChange={toggleFilter}/>
+                <span className="search__error">{searchEmpty && 'Введите ключевое слово'}</span>
+                <span className="search__error">{nothingFound && 'Ничего не найдено'}</span>
+            </>}
         </div>
-        <div className="search__container">
-          <button className="search__button">Найти</button>
-          <div className="search__border"/>
-          {!mobile && <FilterCheckbox/>}
-        </div>
-      </form>
-      {mobile && <FilterCheckbox/>}
-    </div>
-  );
+    );
 
 }

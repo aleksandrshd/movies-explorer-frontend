@@ -3,6 +3,11 @@
     overflow: hidden;
 }
 
+.movie__link {
+    text-decoration: none;
+    color: #fff;
+}
+
 .movie__image {
     width: 100%;
     object-fit: cover;
@@ -24,7 +29,7 @@
 .movie__container {
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
     padding: 10px 0 13px;
 }
 
@@ -37,7 +42,6 @@
     white-space: pre-wrap;
     height: 32px;
     overflow: hidden;
-    /*text-overflow: ellipsis;*/
 }
 
 @media screen and (max-width: 768px) {
@@ -83,8 +87,14 @@
     opacity: 0;
 }
 
-.movie__card:hover .movies__like-button_saved {
+.movie:hover .movie__like-button_saved {
     opacity: 1;
+}
+
+@media screen and (max-width: 544px) {
+    .movie__like-button_saved {
+        opacity: 1;
+    }
 }
 
 .movie__duration {

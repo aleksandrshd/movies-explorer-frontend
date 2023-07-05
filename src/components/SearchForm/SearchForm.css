@@ -1,8 +1,9 @@
 .search {
-    padding: 70px 0 69px;
+    padding: 70px 0 53px;
     border-bottom: 1px solid #424242;
     max-width: 1140px;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 @media screen and (max-width: 1200px) {
@@ -150,4 +151,13 @@
     .search__border {
         display: none;
     }
+}
+
+.search__error {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #8B8B8B;
+    margin-top: 10px;
+    margin-left: 10px;
 }
