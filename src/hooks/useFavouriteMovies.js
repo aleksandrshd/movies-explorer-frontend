@@ -42,7 +42,8 @@ const useFavouriteMovies = () => {
         }
         await api.removeMovieFromFavourites(movieIdDel);
         const indexOfElement = favouriteMovies.indexOf(card);
-        const newFavouriteMovies = favouriteMovies.splice(indexOfElement, 1);
+        const newFavouriteMovies = favouriteMovies.slice(0, indexOfElement);
+        newFavouriteMovies.concat(favouriteMovies.slice(indexOfElement, favouriteMovies.length));
         return setFavouriteMovies(newFavouriteMovies);
       } catch (error) {
         console.log(error);
